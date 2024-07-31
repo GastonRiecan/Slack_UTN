@@ -18,7 +18,9 @@ const Home = () => {
       >
         <img src="/images/workspaces/defaultWorkSpaceImage.png" width="50px" />
         <span>Workspace_name</span>
-        <button>Entrar</button>
+        <Link to="/workspace/1/1">
+          <h2>Entrar</h2>
+        </Link>
       </section>
       <section
         style={{
