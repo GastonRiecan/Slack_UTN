@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
@@ -29,7 +30,9 @@ const Home = () => {
           padding: "2px",
         }}
       >
-        <h2>Crear Entorno</h2>
+        <Link to="/workspace/new">
+          <h2>Crear Entorno</h2>
+        </Link>
       </section>
     </div>
   );
