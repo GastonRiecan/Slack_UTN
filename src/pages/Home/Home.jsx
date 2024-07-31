@@ -1,7 +1,38 @@
 import React from "react";
 
 const Home = () => {
-  return <div>Home</div>;
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: "30px" }}>
+      <h1>Bienvenido a Slack</h1>
+      <h2>Entornos de trabajo:</h2>
+      <section
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          border: "1px solid black",
+          borderRadius: "10px",
+          padding: "2px",
+        }}
+      >
+        <img src="/images/workspaces/defaultWorkSpaceImage.png" width="50px" />
+        <span>Workspace_name</span>
+        <button>Entrar</button>
+      </section>
+      <section
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          border: "1px dashed black",
+          borderRadius: "10px",
+          padding: "2px",
+        }}
+      >
+        <h2>Crear Entorno</h2>
+      </section>
+    </div>
+  );
 };
 
 export default Home;
