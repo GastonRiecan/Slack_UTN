@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://GastonRiecan.github.io/Slack_UTN/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
