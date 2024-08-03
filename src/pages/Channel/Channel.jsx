@@ -1,12 +1,22 @@
 import React, { useState } from "react";
 import { useIsMobile } from "../../hooks/useIsMobile";
-import { workSpaces, users } from "../../data/data.js";
+import { useParams } from "react-router-dom";
 import ChannelHeader from "../../components/ChannelHeader/ChannelHeader";
+import ChannelList from "../../components/ChannelList/ChannelList";
+import Message from "../../components/Message/Message";
+import { workSpaces, users } from "../../data/data.js";
 
 const Channel = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const isMobile = useIsMobile();
-  const currentWorkSpace = workSpaces[0];
+  const { id_channel, id_workspace } = useParams();
+  const currentWorkSpace = workSpaces.find(
+    (workSpace) => workSpace.id === Number(id_workspace)
+  );
+  const currentChannel = currentWorkSpace.channels.find(
+    (channel) => channel.id === Number(id_channel)
+  );
+
   return (
     <>
       <ChannelHeader
@@ -15,8 +25,15 @@ const Channel = () => {
         isMenuOpen={isMenuOpen}
         toggleMenuOpen={() => setIsMenuOpen(!isMenuOpen)}
       />
-      <div style={{ display: "flex", gap: "10px"}}>
-        {!isMobile && (
+      <div style={{ display: "flex", gap: "10px" }}>
+        {!isMobile && <ChannelList workSpace={currentWorkSpace} />}
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            flexGrow: "1",
+          }}
+        >
           <div
             style={{
               display: "flex",
@@ -26,53 +43,12 @@ const Channel = () => {
               border: "1px solid black",
               borderRadius: "10px",
               padding: "2px",
-              width: "30%"
+              overflowY: "scroll",
             }}
           >
-            <h2>ChannelList</h2>
-            <section style={{ display: "flex", flexDirection: "column" }}>
-              <span>#General</span>
-              <span>#Talks</span>
-              <span>#Human Resources</span>
-            </section>
-            <button
-              style={{ border: "1px dashed black", borderRadius: "10px" }}
-            >
-              Crear Canal
-            </button>
-          </div>
-        )}
-        <div>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              border: "1px solid black",
-              borderRadius: "10px",
-              padding: "2px",
-            }}
-          >
-            {/* scrolable */}
-            <section>
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  padding: "2px",
-                }}
-              >
-                <img
-                  src="/images/profile-pictures/Pepe.jpg"
-                />
-                <h3>USERNAME</h3>
-                <span>hour-minutes</span>
-              </div>
-              <p>Aca va el message del user</p>
-              <hr />
-            </section>
+            {currentChannel.messages.map((message) => (
+              <Message key={message.id} message={message} />
+            ))}
           </div>
           <form>
             <input type="text" placeholder="Escribe el mensaje" />
