@@ -1,23 +1,12 @@
 import { Link } from "react-router-dom";
-
+import "./styles.css";
 export const ChannelList = ({ workSpace }) => {
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        border: "1px solid black",
-        borderRadius: "10px",
-        padding: "2px",
-        width: "30%",
-      }}
-    >
-      <h2>ChannelList</h2>
-      <section style={{ display: "flex", flexDirection: "column" }}>
+    <div className="channel-list-container">
+      <h2>CHANNELS</h2>
+      <section>
         {workSpace.channels.map((channel) => (
-          <Link
+          <Link className="channel-link"
             to={`/workspace/${workSpace.id}/${channel.id}`}
             key={channel.id}
           >
@@ -25,7 +14,7 @@ export const ChannelList = ({ workSpace }) => {
           </Link>
         ))}
       </section>
-      <button style={{ border: "1px dashed black", borderRadius: "10px" }}>
+      <button>
         Crear Canal
       </button>
     </div>

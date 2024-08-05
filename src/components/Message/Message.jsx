@@ -1,18 +1,12 @@
 import { users } from "../../data/data.js";
+import "./styles.css";
 
 const Message = ({ message }) => {
   const user = users.find((user) => user.id == message.userID);
 
   return (
     <section>
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          padding: "2px",
-        }}
-      >
+      <div className="message-container">
         <img src={`/images/profile-pictures/${user.profilePicture}`} />
         <h3>{user.userName}</h3>
         <span>{message.timeStamp}</span>

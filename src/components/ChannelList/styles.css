@@ -1,0 +1,39 @@
+.channel-list-container {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 2px;
+    width: 30%;
+}
+
+h2 {
+    font-family: monospace;
+}
+
+section {
+    display: flex;
+    flex-direction: column;
+}
+
+.channel-link {
+    text-decoration: none;
+}
+
+.channel-link:hover {
+    border: 0.5px solid gray;
+    border-radius: 5px;
+    background-color: rgb(204, 204, 204);
+    box-shadow: slategrey;
+    color: black;
+    
+}
+
+button {
+    border: 1px dashed black;
+    border-radius: 10px;
+    padding: 2px;
+    width: 90%;
+    font-size: 20px;
+    margin: 10px;
+}

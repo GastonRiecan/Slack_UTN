@@ -1,0 +1,12 @@
+
+.message-container {
+    display: flex;
+    align-items: center;
+    padding: 2px;
+    gap: 10px;
+}
+
+img {
+    width: 50px;
+    border-radius: 50%;
+}

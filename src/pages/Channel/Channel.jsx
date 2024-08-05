@@ -5,6 +5,7 @@ import ChannelHeader from "../../components/ChannelHeader/ChannelHeader";
 import ChannelList from "../../components/ChannelList/ChannelList";
 import Message from "../../components/Message/Message";
 import { workSpaces, users } from "../../data/data.js";
+import "./styles.css";
 
 const Channel = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -25,27 +26,11 @@ const Channel = () => {
         isMenuOpen={isMenuOpen}
         toggleMenuOpen={() => setIsMenuOpen(!isMenuOpen)}
       />
-      <div style={{ display: "flex", gap: "10px" }}>
+      ""
+      <div className="channel-container">
         {!isMobile && <ChannelList workSpace={currentWorkSpace} />}
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            flexGrow: "1",
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              border: "1px solid black",
-              borderRadius: "10px",
-              padding: "2px",
-              overflowY: "scroll",
-            }}
-          >
+        <div className="message-content">
+          <div className="scrollable">
             {currentChannel.messages.map((message) => (
               <Message key={message.id} message={message} />
             ))}

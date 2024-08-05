@@ -1,0 +1,23 @@
+.home-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.workspaces {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 2px;
+}
+
+.new-workspace {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px dashed greenyellow;
+    border-radius: 10px;
+    padding: 2px;
+}

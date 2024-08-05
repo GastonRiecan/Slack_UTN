@@ -1,24 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { workSpaces } from "../../data/data.js";
+import "./styles.css";
 
 const Home = () => {
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "30px" }}>
+    <div className="home-container">
       <h1>Bienvenido a Slack</h1>
       <h2>Entornos de trabajo:</h2>
       {workSpaces.map((workSpace) => (
-        <section
-          key={workSpace.id}
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            border: "1px solid black",
-            borderRadius: "10px",
-            padding: "2px",
-          }}
-        >
+        <section className="workspaces" key={workSpace.id}>
           <img src={`images/workspaces/${workSpace.thumbnail}`} width="50px" />
           <span>{workSpace.name}</span>
           <Link to={`/workspace/${workSpace.id}/${workSpace.channels[0].id}`}>
@@ -26,16 +17,7 @@ const Home = () => {
           </Link>
         </section>
       ))}
-      <section
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          border: "1px dashed black",
-          borderRadius: "10px",
-          padding: "2px",
-        }}
-      >
+      <section className="new-workspace">
         <Link to="/workspace/new">
           <h2>Crear Entorno</h2>
         </Link>
