@@ -18,8 +18,14 @@ const ChannelCreationForm = ({ handleCancel }) => {
         value={channelName}
         onChange={(e) => setChannelName(e.target.value)}
       />
-      <button type="submit">Confirmar</button>
-      <button type="reset" onClick={handleCancel}>
+      <button className="create-channel-btn" type="submit">
+        Confirmar
+      </button>
+      <button
+        className="create-channel-btn"
+        type="reset"
+        onClick={handleCancel}
+      >
         Cancelar
       </button>
     </form>

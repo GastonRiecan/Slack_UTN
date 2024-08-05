@@ -9,6 +9,7 @@ import "./styles.css";
 
 const Channel = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [newMessage, setNewMessage] = useState("");
   const isMobile = useIsMobile();
   const { id_channel, id_workspace } = useParams();
   const currentWorkSpace = workSpaces.find(
@@ -17,6 +18,12 @@ const Channel = () => {
   const currentChannel = currentWorkSpace.channels.find(
     (channel) => channel.id === Number(id_channel)
   );
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(newMessage);
+    setNewMessage("");
+  };
 
   return (
     <>
@@ -43,9 +50,15 @@ const Channel = () => {
               <Message key={message.id} message={message} />
             ))}
           </div>
-          <form>
-            <input type="text" placeholder="Escribe el mensaje" />
-            <button>Enviar</button>
+          <form onSubmit={handleSubmit}>
+            <input
+              type="text"
+              placeholder="Escribe el mensaje"
+              required
+              value={newMessage}
+              onChange={(e) => setNewMessage(e.target.value)}
+            />
+            <button type="submit">Enviar</button>
           </form>
         </div>
       </div>
