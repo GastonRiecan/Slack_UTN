@@ -13,11 +13,15 @@
     padding: 2px;
 }
 
+.workspaces > img {
+    width: 50px;
+}
+
 .new-workspace {
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px dashed greenyellow;
+    border: 1px dashed black;
     border-radius: 10px;
     padding: 2px;
 }

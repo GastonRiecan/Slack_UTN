@@ -7,7 +7,7 @@
 .message-content {
     display: flex;
     flex-direction: column;
-    flex-grow: 1;
+    width: 80%;
 }
 
 .scrollable {
@@ -17,6 +17,8 @@
     border-radius: 10px;
     padding: 2px;
     overflow-y: scroll;
+    flex-grow: 1;
+
 }
 
 form {

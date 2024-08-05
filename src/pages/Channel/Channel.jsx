@@ -26,7 +26,6 @@ const Channel = () => {
         isMenuOpen={isMenuOpen}
         toggleMenuOpen={() => setIsMenuOpen(!isMenuOpen)}
       />
-      ""
       <div className="channel-container">
         {!isMobile && <ChannelList workSpace={currentWorkSpace} />}
         <div className="message-content">

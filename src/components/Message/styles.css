@@ -6,7 +6,7 @@
     gap: 10px;
 }
 
-img {
+.message-container > img {
     width: 50px;
     border-radius: 50%;
 }

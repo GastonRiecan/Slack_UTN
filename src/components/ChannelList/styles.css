@@ -11,9 +11,9 @@ h2 {
     font-family: monospace;
 }
 
-section {
+.workspaces {
     display: flex;
-    flex-direction: column;
+    margin: 4px;
 }
 
 .channel-link {
@@ -29,11 +29,22 @@ section {
     
 }
 
-button {
+.channel-list-container > button {
     border: 1px dashed black;
     border-radius: 10px;
     padding: 2px;
     width: 90%;
-    font-size: 20px;
+    font-size: 18px;
     margin: 10px;
+}
+
+.channel-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.current-channel {
+    border: 1px solid gray;
+    border-radius: 5px;
+    margin: 3px 0;
 }

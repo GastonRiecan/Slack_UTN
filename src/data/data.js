@@ -61,7 +61,7 @@ export const workSpaces = [
     },
     {
         id: 2,
-        name: "General",
+        name: "Consultas",
         thumbnail: "defaultWorkSpaceImage.png",
         channels: [
             {

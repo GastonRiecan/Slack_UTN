@@ -10,7 +10,7 @@ const Home = () => {
       <h2>Entornos de trabajo:</h2>
       {workSpaces.map((workSpace) => (
         <section className="workspaces" key={workSpace.id}>
-          <img src={`images/workspaces/${workSpace.thumbnail}`} width="50px" />
+          <img src={`images/workspaces/${workSpace.thumbnail}`}/>
           <span>{workSpace.name}</span>
           <Link to={`/workspace/${workSpace.id}/${workSpace.channels[0].id}`}>
             <h2>Entrar</h2>
