@@ -3,8 +3,11 @@ import "./styles.css";
 import { useParams } from "react-router-dom";
 import { useIsMobile } from "../../hooks/useIsMobile";
 import ChannelHeader from "../ChannelHeader/ChannelHeader";
+import { useState } from "react";
+import ChannelCreationForm from "../ChannelCreationForm/ChannelCreationForm";
 
 export const ChannelList = ({ workSpace, toggleMenuOpen, isMenuOpen }) => {
+  const [isFormOpen, setIsFormOpen] = useState(false);
   const { id_channel } = useParams();
   const isMobile = useIsMobile();
 
@@ -31,7 +34,11 @@ export const ChannelList = ({ workSpace, toggleMenuOpen, isMenuOpen }) => {
           </Link>
         ))}
       </section>
-      <button>Crear Canal</button>
+      {isFormOpen ? (
+        <ChannelCreationForm handleCancel={() => setIsFormOpen(false)} />
+      ) : (
+        <button onClick={() => setIsFormOpen(!isFormOpen)}>Crear Canal</button>
+      )}
     </div>
   );
 };
