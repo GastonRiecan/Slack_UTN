@@ -26,7 +26,17 @@ const Channel = () => {
         toggleMenuOpen={() => setIsMenuOpen(!isMenuOpen)}
       />
       <div className="channel-container">
-        {!isMobile && <ChannelList workSpace={currentWorkSpace} />}
+        {isMobile ? (
+          isMenuOpen && (
+            <ChannelList
+              workSpace={currentWorkSpace}
+              isMenuOpen={isMenuOpen}
+              toggleMenuOpen={() => setIsMenuOpen(!isMenuOpen)}
+            />
+          )
+        ) : (
+          <ChannelList workSpace={currentWorkSpace} />
+        )}
         <div className="message-content">
           <div className="scrollable">
             {currentChannel.messages.map((message) => (
