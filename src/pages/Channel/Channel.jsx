@@ -22,7 +22,6 @@ const Channel = () => {
     <>
       <ChannelHeader
         workSpace={currentWorkSpace}
-        isMobile={isMobile}
         isMenuOpen={isMenuOpen}
         toggleMenuOpen={() => setIsMenuOpen(!isMenuOpen)}
       />
