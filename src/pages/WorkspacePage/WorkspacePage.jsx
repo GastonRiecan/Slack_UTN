@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { useIsMobile } from "../../hooks/useIsMobile";
+import { useIsMobile } from "../../hooks/useIsMobile.js";
 import { useParams } from "react-router-dom";
-import ChannelHeader from "../../components/ChannelHeader/ChannelHeader";
-import ChannelList from "../../components/ChannelList/ChannelList";
-import Message from "../../components/Message/Message";
-import { workSpaces, users } from "../../data/data.js";
+import ChannelHeader from "../../components/ChannelHeader/ChannelHeader.jsx";
+import ChannelList from "../../components/ChannelList/ChannelList.jsx";
+import Message from "../../components/Message/Message.jsx";
+import { workSpaces } from "../../data/data.js";
 import "./styles.css";
 
-const Channel = () => {
+const WorkspacePage = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [newMessage, setNewMessage] = useState("");
   const isMobile = useIsMobile();
@@ -66,4 +66,4 @@ const Channel = () => {
   );
 };
 
-export default Channel;
+export default WorkspacePage;

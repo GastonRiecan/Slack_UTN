@@ -1,15 +1,15 @@
 import { Route, Routes } from "react-router-dom";
-import Home from "./pages/Home/Home";
-import NewWorkspace from "./pages/NewWorkspace/NewWorkspace";
-import Channel from "./pages/Channel/Channel";
+import HomePage from "./pages/HomePage/HomePage";
+import NewWorkspacePage from "./pages/NewWorkspacePage/NewWorkspacePage";
+import WorkspacePage from "./pages/WorkspacePage/WorkspacePage";
 
 const App = () => {
   return (
     <main>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/workspace/new" element={<NewWorkspace />} />
-        <Route path="/workspace/:id_workspace/:id_channel" element={<Channel />} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/workspace/new" element={<NewWorkspacePage />} />
+        <Route path="/workspace/:id_workspace/:id_channel" element={<WorkspacePage />} />
       </Routes>
     </main>
   );

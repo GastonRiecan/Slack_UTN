@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { workSpaces } from "../../data/data.js";
 import "./styles.css";
 
-const Home = () => {
+const HomePage = () => {
   return (
     <div className="home-container">
       <h1>Bienvenido a Slack</h1>
@@ -28,4 +28,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomePage;

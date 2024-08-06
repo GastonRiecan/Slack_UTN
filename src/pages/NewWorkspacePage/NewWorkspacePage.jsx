@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./styles.css";
 
-const NewWorkspace = () => {
+const NewWorkspacePage = () => {
   const navigate = useNavigate();
   const [workspaceName, setWorkspaceName] = useState("");
   const [channelName, setChannelName] = useState("");
@@ -52,7 +52,7 @@ const NewWorkspace = () => {
   );
 };
 
-export default NewWorkspace;
+export default NewWorkspacePage;
 /* 
 crear entorno : 
 tomar valores de los 2 imputs para poder mostrarlos por log
