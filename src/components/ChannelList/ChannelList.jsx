@@ -1,15 +1,20 @@
-import { Link } from "react-router-dom";
-import "./styles.css";
-import { useParams } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { useIsMobile } from "../../hooks/useIsMobile";
 import ChannelHeader from "../ChannelHeader/ChannelHeader";
-import { useState } from "react";
 import ChannelCreationForm from "../ChannelCreationForm/ChannelCreationForm";
+import "./styles.css";
 
 export const ChannelList = ({ workSpace, toggleMenuOpen, isMenuOpen }) => {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const { id_channel } = useParams();
   const isMobile = useIsMobile();
+  const navigate = useNavigate();
+
+  const handleClick = (channel_id) => {
+    navigate(`/workspace/${workSpace.id}/${channel_id}`);
+    if (isMenuOpen) toggleMenuOpen();
+  };
 
   return (
     <div className={`channel-list-container ${isMobile ? "mobile" : ""}`}>
@@ -23,15 +28,15 @@ export const ChannelList = ({ workSpace, toggleMenuOpen, isMenuOpen }) => {
       <span>Canales</span>
       <section className="channel-section">
         {workSpace.channels.map((channel) => (
-          <Link
+          <p
+            onClick={() => handleClick(channel.id)}
             className={`channel-link ${
               id_channel == channel.id ? "current-channel" : ""
             }`}
-            to={`/workspace/${workSpace.id}/${channel.id}`}
             key={channel.id}
           >
             #{channel.name}
-          </Link>
+          </p>
         ))}
       </section>
       {isFormOpen ? (

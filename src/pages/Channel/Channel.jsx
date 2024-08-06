@@ -11,7 +11,7 @@ const Channel = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [newMessage, setNewMessage] = useState("");
   const isMobile = useIsMobile();
-  const { id_channel, id_workspace } = useParams();
+  const { id_workspace, id_channel } = useParams();
   const currentWorkSpace = workSpaces.find(
     (workSpace) => workSpace.id === Number(id_workspace)
   );
