@@ -1,27 +1,60 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import "./styles.css"
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "./styles.css";
 
 const NewWorkspace = () => {
+  const navigate = useNavigate();
+  const [workspaceName, setWorkspaceName] = useState("");
+  const [channelName, setChannelName] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(workspaceName);
+    console.log(channelName);
+  };
+
   return (
     <div className="new-workspace-container">
       <h1>Crea un entorno de trabajo</h1>
-      <form>
-        <label htmlFor="workspaceName">workspaceName</label>
-        <input type="text" name="workspaceName" />
-        <label htmlFor="channelName">channelName</label>
-        <input type="text" name="channelName" />
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="workspaceName">Nombre del entorno de trabajo</label>
+        <input
+          type="text"
+          name="workspaceName"
+          required
+          placeholder="Espacio 1"
+          value={workspaceName}
+          onChange={(e) => setWorkspaceName(e.target.value)}
+        />
+        <label htmlFor="channelName">Nombre del canal</label>
+        <input
+          type="text"
+          name="channelName"
+          required
+          placeholder="Saludos"
+          value={channelName}
+          onChange={(e) => setChannelName(e.target.value)}
+        />
+        <div className="create-section">
+          <button
+            onClick={() => navigate("/")}
+            className="create-link"
+            type="button"
+          >
+            Cancelar
+          </button>
+          <button className="create-link" type="submit">
+            Crear Entorno
+          </button>
+        </div>
       </form>
-      <section className="create-section">
-        <Link className="create-link" to="/workspace/1/1">
-          <h2 className="h2-create-section">Crear Entorno</h2>
-        </Link>
-        <Link className="create-link" to="/">
-          <h2 className="h2-create-section">Cancelar</h2>
-        </Link>
-      </section>
     </div>
   );
 };
 
 export default NewWorkspace;
+/* 
+crear entorno : 
+tomar valores de los 2 imputs para poder mostrarlos por log
+
+*/

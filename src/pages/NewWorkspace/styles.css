@@ -17,7 +17,7 @@ form {
 
 .create-section {
     display: flex;
-    flex-direction: row;
+    flex-direction: row-reverse;
     gap: 25px;
     align-items: center;
     padding: 2px;
