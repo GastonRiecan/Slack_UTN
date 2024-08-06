@@ -22,17 +22,17 @@
 
 }
 
-form {
+.message-form {
 display: flex;
 
 }
 
-input {
+.message-text {
     width: 70%;
     border-radius: 8px;
     background-color: lightgoldenrodyellow;
 }
 
-button {
+.send-button {
     width: 30%;
 }

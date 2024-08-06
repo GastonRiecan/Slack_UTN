@@ -50,15 +50,15 @@ const Channel = () => {
               <Message key={message.id} message={message} />
             ))}
           </div>
-          <form onSubmit={handleSubmit}>
-            <input
+          <form className="message-form" onSubmit={handleSubmit}>
+            <input className="message-text"
               type="text"
               placeholder="Escribe el mensaje"
               required
               value={newMessage}
               onChange={(e) => setNewMessage(e.target.value)}
             />
-            <button type="submit">Enviar</button>
+            <button className="send-button" type="submit">Enviar</button>
           </form>
         </div>
       </div>
