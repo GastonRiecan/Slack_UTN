@@ -1,9 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { workSpaces } from "../../data/data.js";
 import "./styles.css";
+import { useWorkspacesContext } from "../../contexts/WorkspacesContext.jsx";
 
 const HomePage = () => {
+  const { workSpaces } = useWorkspacesContext();
+
   return (
     <div className="home-container">
       <h1>Bienvenido a Slack</h1>
