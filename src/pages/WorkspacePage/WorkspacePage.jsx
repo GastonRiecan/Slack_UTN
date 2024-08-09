@@ -4,19 +4,20 @@ import { useParams } from "react-router-dom";
 import ChannelHeader from "../../components/ChannelHeader/ChannelHeader.jsx";
 import ChannelList from "../../components/ChannelList/ChannelList.jsx";
 import Message from "../../components/Message/Message.jsx";
-import { workSpaces } from "../../data/data.js";
 import "./styles.css";
+import { useWorkspacesContext } from "../../contexts/WorkspacesContext";
 
 const WorkspacePage = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [newMessage, setNewMessage] = useState("");
   const isMobile = useIsMobile();
+  const { workSpaces } = useWorkspacesContext();
   const { id_workspace, id_channel } = useParams();
   const currentWorkSpace = workSpaces.find(
-    (workSpace) => workSpace.id === Number(id_workspace)
+    (workSpace) => workSpace.id == id_workspace
   );
   const currentChannel = currentWorkSpace.channels.find(
-    (channel) => channel.id === Number(id_channel)
+    (channel) => channel.id == id_channel
   );
 
   const handleSubmit = (e) => {
@@ -51,14 +52,17 @@ const WorkspacePage = () => {
             ))}
           </div>
           <form className="message-form" onSubmit={handleSubmit}>
-            <input className="message-text"
+            <input
+              className="message-text"
               type="text"
               placeholder="Escribe el mensaje"
               required
               value={newMessage}
               onChange={(e) => setNewMessage(e.target.value)}
             />
-            <button className="send-button" type="submit">Enviar</button>
+            <button className="send-button" type="submit">
+              Enviar
+            </button>
           </form>
         </div>
       </div>
