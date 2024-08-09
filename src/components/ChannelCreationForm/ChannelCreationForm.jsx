@@ -1,11 +1,11 @@
 import { useState } from "react";
 import "./styles.css";
 
-const ChannelCreationForm = ({ handleCancel }) => {
+const ChannelCreationForm = ({ handleCancel, handleCreateChannel }) => {
   const [channelName, setChannelName] = useState("");
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(channelName);
+    handleCreateChannel(channelName);
     handleCancel();
   };
 

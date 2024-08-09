@@ -23,9 +23,32 @@ export const WorkspacesContextProvider = ({ children }) => {
     return newWorkspace;
   };
 
+  const createChannel = (workspaceId, channelName) => {
+    const newChannel = {
+      id: crypto.randomUUID(),
+      name: channelName,
+      messages: [],
+    };
+    const currentWorkSpace = workSpacesData.find(
+      (workSpace) => workSpace.id == workspaceId
+    );
+
+    const updatedCurrentWorkSpace = {
+      ...currentWorkSpace,
+      channels: [...currentWorkSpace.channels, newChannel],
+    };
+
+    const wsIndex = workSpacesData.findIndex(
+      (w) => w.id == currentWorkSpace.id
+    );
+    const updatedWorkSpacesData = [...workSpacesData];
+    updatedWorkSpacesData[wsIndex] = updatedCurrentWorkSpace;
+    setWorkSpacesData(updatedWorkSpacesData);
+  };
+
   return (
     <WorkspacesContext.Provider
-      value={{ workSpaces: workSpacesData, createWorkspace }}
+      value={{ workSpaces: workSpacesData, createWorkspace, createChannel }}
     >
       {children}
     </WorkspacesContext.Provider>

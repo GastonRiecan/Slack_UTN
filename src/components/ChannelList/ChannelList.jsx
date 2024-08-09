@@ -3,6 +3,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useIsMobile } from "../../hooks/useIsMobile";
 import ChannelHeader from "../ChannelHeader/ChannelHeader";
 import ChannelCreationForm from "../ChannelCreationForm/ChannelCreationForm";
+import { useWorkspacesContext } from "../../contexts/WorkspacesContext";
+
 import "./styles.css";
 
 export const ChannelList = ({ workSpace, toggleMenuOpen, isMenuOpen }) => {
@@ -10,6 +12,7 @@ export const ChannelList = ({ workSpace, toggleMenuOpen, isMenuOpen }) => {
   const { id_channel } = useParams();
   const isMobile = useIsMobile();
   const navigate = useNavigate();
+  const { createChannel } = useWorkspacesContext();
 
   const handleClick = (channel_id) => {
     navigate(`/workspace/${workSpace.id}/${channel_id}`);
@@ -40,7 +43,10 @@ export const ChannelList = ({ workSpace, toggleMenuOpen, isMenuOpen }) => {
         ))}
       </section>
       {isFormOpen ? (
-        <ChannelCreationForm handleCancel={() => setIsFormOpen(false)} />
+        <ChannelCreationForm
+          handleCancel={() => setIsFormOpen(false)}
+          handleCreateChannel={(channelName) => createChannel(workSpace.id, channelName)}
+        />
       ) : (
         <button onClick={() => setIsFormOpen(!isFormOpen)}>Crear Canal</button>
       )}
