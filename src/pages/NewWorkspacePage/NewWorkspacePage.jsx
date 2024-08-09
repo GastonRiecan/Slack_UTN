@@ -1,16 +1,18 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./styles.css";
+import { useWorkspacesContext } from "../../contexts/WorkspacesContext";
 
 const NewWorkspacePage = () => {
   const navigate = useNavigate();
+  const { createWorkspace, workSpaces } = useWorkspacesContext();
   const [workspaceName, setWorkspaceName] = useState("");
   const [channelName, setChannelName] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(workspaceName);
-    console.log(channelName);
+    const newWorkspace = createWorkspace(workspaceName, channelName);
+    navigate(`/workspace/${newWorkspace.id}/${newWorkspace.channels[0].id}`);
   };
 
   return (
@@ -53,8 +55,4 @@ const NewWorkspacePage = () => {
 };
 
 export default NewWorkspacePage;
-/* 
-crear entorno : 
-tomar valores de los 2 imputs para poder mostrarlos por log
 
-*/

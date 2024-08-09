@@ -20,10 +20,13 @@ export const WorkspacesContextProvider = ({ children }) => {
       ],
     };
     setWorkSpacesData([...workSpacesData, newWorkspace]);
+    return newWorkspace;
   };
 
   return (
-    <WorkspacesContext.Provider value={{ workSpaces: workSpacesData, createWorkspace }}>
+    <WorkspacesContext.Provider
+      value={{ workSpaces: workSpacesData, createWorkspace }}
+    >
       {children}
     </WorkspacesContext.Provider>
   );
