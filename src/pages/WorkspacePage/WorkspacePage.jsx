@@ -11,7 +11,7 @@ const WorkspacePage = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [newMessage, setNewMessage] = useState("");
   const isMobile = useIsMobile();
-  const { workSpaces } = useWorkspacesContext();
+  const { workSpaces, createMessage } = useWorkspacesContext();
   const { id_workspace, id_channel } = useParams();
   const currentWorkSpace = workSpaces.find(
     (workSpace) => workSpace.id == id_workspace
@@ -22,7 +22,7 @@ const WorkspacePage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(newMessage);
+    createMessage(newMessage, id_workspace, id_channel);
     setNewMessage("");
   };
 

@@ -46,9 +46,55 @@ export const WorkspacesContextProvider = ({ children }) => {
     setWorkSpacesData(updatedWorkSpacesData);
   };
 
+  const createMessage = (message, idWorkspace, idChannel) => {
+    const newMessage = {
+      id: crypto.randomUUID(),
+      userID: "1",
+      timeStamp: new Date().toLocaleString().slice(0, -3),
+      content: message,
+    };
+
+    const currentWorkSpace = workSpacesData.find(
+      (workSpace) => workSpace.id == idWorkspace
+    );
+
+    const currentChannel = currentWorkSpace.channels.find(
+      (channel) => channel.id == idChannel
+    );
+
+    const updatedCurrentChannel = {
+      ...currentChannel,
+      messages: [...currentChannel.messages, newMessage],
+    };
+
+    const chIndex = currentWorkSpace.channels.findIndex(
+      (ch) => ch.id == updatedCurrentChannel.id
+    );
+
+    const updatedChannels = [...currentWorkSpace.channels];
+    updatedChannels[chIndex] = updatedCurrentChannel;
+
+    const updatedCurrentWorkSpace = {
+      ...currentWorkSpace,
+      channels: updatedChannels,
+    };
+
+    const wsIndex = workSpacesData.findIndex(
+      (w) => w.id == currentWorkSpace.id
+    );
+    const updatedWorkSpacesData = [...workSpacesData];
+    updatedWorkSpacesData[wsIndex] = updatedCurrentWorkSpace;
+    setWorkSpacesData(updatedWorkSpacesData);
+  };
+
   return (
     <WorkspacesContext.Provider
-      value={{ workSpaces: workSpacesData, createWorkspace, createChannel }}
+      value={{
+        workSpaces: workSpacesData,
+        createWorkspace,
+        createChannel,
+        createMessage,
+      }}
     >
       {children}
     </WorkspacesContext.Provider>
