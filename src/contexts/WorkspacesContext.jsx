@@ -1,11 +1,17 @@
-import { createContext, useContext, useState } from "react";
-import { workSpaces } from "../data/data";
+import { createContext, useContext, useEffect, useState } from "react";
+import { getData, setData } from "../helpers/localStorage";
 
 export const WorkspacesContext = createContext();
+
+const workSpaces = getData()
 
 export const WorkspacesContextProvider = ({ children }) => {
   const [workSpacesData, setWorkSpacesData] = useState(workSpaces);
 
+  useEffect(() => {
+    setData(workSpacesData)
+  }, [workSpacesData])
+  
   const createWorkspace = (workspaceName, channelName) => {
     const newWorkspace = {
       id: crypto.randomUUID(),
