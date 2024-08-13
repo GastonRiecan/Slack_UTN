@@ -3,15 +3,15 @@ import { getData, setData } from "../helpers/localStorage";
 
 export const WorkspacesContext = createContext();
 
-const workSpaces = getData()
+const workSpaces = getData();
 
 export const WorkspacesContextProvider = ({ children }) => {
   const [workSpacesData, setWorkSpacesData] = useState(workSpaces);
 
   useEffect(() => {
-    setData(workSpacesData)
-  }, [workSpacesData])
-  
+    setData(workSpacesData);
+  }, [workSpacesData]);
+
   const createWorkspace = (workspaceName, channelName) => {
     const newWorkspace = {
       id: crypto.randomUUID(),
@@ -50,6 +50,7 @@ export const WorkspacesContextProvider = ({ children }) => {
     const updatedWorkSpacesData = [...workSpacesData];
     updatedWorkSpacesData[wsIndex] = updatedCurrentWorkSpace;
     setWorkSpacesData(updatedWorkSpacesData);
+    return newChannel;
   };
 
   const createMessage = (message, idWorkspace, idChannel) => {

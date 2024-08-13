@@ -19,6 +19,11 @@ export const ChannelList = ({ workSpace, toggleMenuOpen, isMenuOpen }) => {
     if (isMenuOpen) toggleMenuOpen();
   };
 
+  const handleCreateChannel = (channelName) => {
+    const newChannel = createChannel(workSpace.id, channelName);
+    navigate(`/workspace/${workSpace.id}/${newChannel.id}`);
+  };
+
   return (
     <div className={`channel-list-container ${isMobile ? "mobile" : ""}`}>
       {isMobile && (
@@ -45,7 +50,7 @@ export const ChannelList = ({ workSpace, toggleMenuOpen, isMenuOpen }) => {
       {isFormOpen ? (
         <ChannelCreationForm
           handleCancel={() => setIsFormOpen(false)}
-          handleCreateChannel={(channelName) => createChannel(workSpace.id, channelName)}
+          handleCreateChannel={handleCreateChannel}
         />
       ) : (
         <button onClick={() => setIsFormOpen(!isFormOpen)}>Crear Canal</button>
