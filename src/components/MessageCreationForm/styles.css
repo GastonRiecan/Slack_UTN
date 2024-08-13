@@ -1,0 +1,7 @@
+.message-form {
+  display: flex;
+}
+
+.send-button {
+  width: 30%;
+}

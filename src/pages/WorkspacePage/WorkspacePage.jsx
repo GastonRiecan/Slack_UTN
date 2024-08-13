@@ -6,25 +6,21 @@ import ChannelList from "../../components/ChannelList/ChannelList.jsx";
 import Message from "../../components/Message/Message.jsx";
 import "./styles.css";
 import { useWorkspacesContext } from "../../contexts/WorkspacesContext";
+import MessageCreationForm from "../../components/MessageCreationForm/MessageCreationForm.jsx";
 
 const WorkspacePage = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [newMessage, setNewMessage] = useState("");
   const isMobile = useIsMobile();
-  const { workSpaces, createMessage } = useWorkspacesContext();
+  const { workSpaces } = useWorkspacesContext();
   const { id_workspace, id_channel } = useParams();
+
   const currentWorkSpace = workSpaces.find(
     (workSpace) => workSpace.id == id_workspace
   );
+
   const currentChannel = currentWorkSpace.channels.find(
     (channel) => channel.id == id_channel
   );
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    createMessage(newMessage, id_workspace, id_channel);
-    setNewMessage("");
-  };
 
   return (
     <>
@@ -46,24 +42,13 @@ const WorkspacePage = () => {
           <ChannelList workSpace={currentWorkSpace} />
         )}
         <div className="message-content">
+          <h3>#{currentChannel.name}</h3>
           <div className="scrollable">
             {currentChannel.messages.map((message) => (
               <Message key={message.id} message={message} />
             ))}
           </div>
-          <form className="message-form" onSubmit={handleSubmit}>
-            <input
-              className="message-text"
-              type="text"
-              placeholder="Escribe el mensaje"
-              required
-              value={newMessage}
-              onChange={(e) => setNewMessage(e.target.value)}
-            />
-            <button className="send-button" type="submit">
-              Enviar
-            </button>
-          </form>
+          <MessageCreationForm />
         </div>
       </div>
     </>
