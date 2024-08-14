@@ -1,12 +1,24 @@
-form {
+.workspaceCreationForm {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
   gap: 10px;
   border: 1px solid black;
-  border-radius: 10px;
+  border-radius: 8px;
   padding: 2px;
+  background-color: ivory;
+  width: 60%;
+}
+
+.workspace-create-input {
+  border: 1px solid black;
+  border-radius: 8px;
+  background-color: rgb(214, 213, 213);
+}
+
+.workspace-create-input::placeholder {
+  text-align: center;
 }
 
 .create-section {
@@ -19,4 +31,30 @@ form {
 
 .create-link {
   text-decoration: none;
+  border: 1px solid black;
+  border-radius: 8px;
+  background-color: darkseagreen;
+}
+
+.cancel-link {
+  text-decoration: none;
+  border: 1px solid black;
+  border-radius: 8px;
+  background-color: orangered;
+}
+
+@media screen and (max-width: 315px) {
+  .workspaceCreationForm {
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .workspace-create-input {
+    width: 70%;
+  }
+
+  .create-section {
+    flex-direction: column;
+  }
 }

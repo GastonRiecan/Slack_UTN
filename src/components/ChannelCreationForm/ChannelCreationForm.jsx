@@ -10,8 +10,9 @@ const ChannelCreationForm = ({ handleCancel, handleCreateChannel }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="channelCreationForm" onSubmit={handleSubmit}>
       <input
+        className="channelCreationForm-input"
         type="text"
         placeholder="Nombre del canal"
         required
@@ -22,7 +23,7 @@ const ChannelCreationForm = ({ handleCancel, handleCreateChannel }) => {
         Confirmar
       </button>
       <button
-        className="create-channel-btn"
+        className="cancel-create-channel-btn"
         type="reset"
         onClick={handleCancel}
       >

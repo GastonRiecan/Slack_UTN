@@ -1,5 +1,56 @@
-.create-channel-btn {
-    width: 80%;
-    border-radius: 5px;
+.channelCreationForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  border: 1px solid black;
+  border-radius: 8px;
+  padding: 2px;
+  background-color: ivory;
 }
 
+.create-channel-btn {
+  width: 80%;
+  border-radius: 8px;
+  border: 1px solid black;
+  background-color: darkseagreen;
+}
+
+.cancel-create-channel-btn {
+  width: 80%;
+  border-radius: 8px;
+  border: 1px solid black;
+  background-color: orangered;
+}
+
+.channelCreationForm-input {
+  border: 1px solid black;
+  border-radius: 8px;
+  width: 80%;
+}
+
+.channelCreationForm-input::placeholder {
+  text-align: center;
+}
+
+@media screen and (max-width: 640px) {
+  .channelCreationForm-input {
+    width: 75%;
+  }
+  .channelCreationForm-input::placeholder {
+    font-size: 11px;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .channelCreationForm-input::placeholder {
+    font-size: 11px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .channelCreationForm-input::placeholder {
+    font-size: 10px;
+  }
+}

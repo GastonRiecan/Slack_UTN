@@ -16,9 +16,10 @@ const WorkspaceCreationForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="workspaceCreationForm" onSubmit={handleSubmit}>
       <label htmlFor="workspaceName">Nombre del entorno de trabajo</label>
       <input
+        className="workspace-create-input"
         type="text"
         name="workspaceName"
         required
@@ -28,6 +29,7 @@ const WorkspaceCreationForm = () => {
       />
       <label htmlFor="channelName">Nombre del canal</label>
       <input
+        className="workspace-create-input"
         type="text"
         name="channelName"
         required
@@ -38,7 +40,7 @@ const WorkspaceCreationForm = () => {
       <div className="create-section">
         <button
           onClick={() => navigate("/")}
-          className="create-link"
+          className="cancel-link"
           type="button"
         >
           Cancelar

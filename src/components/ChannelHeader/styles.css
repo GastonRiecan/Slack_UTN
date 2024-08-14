@@ -1,4 +1,14 @@
 header {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
+}
+
+.salir-link {
+  text-decoration: none;
+}
+
+.toggle-btn {
+  background-color: transparent;
+  border: none;
+  font-size: 25px;
 }

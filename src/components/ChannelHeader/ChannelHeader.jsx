@@ -4,16 +4,24 @@ import { useIsMobile } from "../../hooks/useIsMobile";
 
 const ChannelHeader = ({ workSpace, toggleMenuOpen, isMenuOpen }) => {
   const isMobile = useIsMobile();
-  const icon = isMenuOpen ? "❌" : "⏹️";
+  const icon = isMenuOpen ? (
+    <i className="bi bi-x-circle"></i>
+  ) : (
+    <i className="bi bi-list"></i>
+  );
 
   return (
     <header>
       <h2>{workSpace.name}</h2>
-      <Link to="/">
+      <Link className="salir-link" to="/">
         <h2>Salir</h2>
       </Link>
 
-      {isMobile ? <button onClick={toggleMenuOpen}>{icon}</button> : null}
+      {isMobile ? (
+        <button className="toggle-btn" onClick={toggleMenuOpen}>
+          {icon}
+        </button>
+      ) : null}
     </header>
   );
 };

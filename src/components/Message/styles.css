@@ -1,12 +1,29 @@
-
 .message-container {
-    display: flex;
-    align-items: center;
-    padding: 2px;
-    gap: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2px;
+  gap: 10px;
 }
 
-.message-container > img {
-    width: 50px;
-    border-radius: 50%;
+.message-container > span {
+  font-size: 12px;
+  font-family: monospace;
+  font-weight: bold;
+}
+
+.user-info {
+  display: flex;
+  gap: 10px;
+}
+
+.user-info > img {
+  width: 50px;
+  border-radius: 50%;
+}
+
+.full-message {
+  border: 1px solid black;
+  border-radius: 6px;
+  background-color: ivory;
 }

@@ -1,14 +1,25 @@
 body {
-    background-color: #3a3a3a;
-    box-sizing: border-box;
+  background-color: #3a3a3a;
+  box-sizing: border-box;
 }
 
+h1,
+h2,
+h3 {
+  font-family: monospace;
+}
 
 main {
-    margin: 0 auto;
-    background-color: antiquewhite;
-    border-radius: 10px;
-    height: 100vh;
-    max-width: 1024px;
+  margin: 0 auto;
+  background-color: beige;
+  color: black;
+  border-radius: 10px;
+  height: 100vh;
+  max-width: 1024px;
 }
 
+@media screen and (max-width: 430px) {
+  main {
+    background-color: aquamarine;
+  }
+}
