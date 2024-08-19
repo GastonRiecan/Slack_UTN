@@ -1,0 +1,17 @@
+.gif-list-container {
+    display: flex;
+    flex-wrap: wrap;
+    height: 80px;
+    overflow-y: scroll;
+    margin: 5px 0;
+}
+
+
+.gifs-list-gif {
+    height: 80px;
+    cursor: pointer;
+}
+
+.no-scroll {
+    overflow: hidden;
+}
