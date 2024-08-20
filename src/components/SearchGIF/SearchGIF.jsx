@@ -45,7 +45,7 @@ const SearchGIF = ({ toggleSearchGIFVisibility, handleCreateMessage }) => {
       >
         Cancelar
       </button>
-      <button onClick={searchGIF}>Buscar</button>
+      <button onClick={searchGIF} type="button">Buscar</button>
     </div>
   );
 };
