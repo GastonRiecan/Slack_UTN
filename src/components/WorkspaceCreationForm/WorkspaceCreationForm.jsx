@@ -24,6 +24,9 @@ const WorkspaceCreationForm = () => {
   };
 
   const handleSubmit = (e) => {
+    if(errors.workspaceName.length > 0 || errors.channelName.length > 0) {
+      return
+    }
     e.preventDefault();
     const newWorkspace = createWorkspace(
       formData.workspaceName,
@@ -103,9 +106,11 @@ const WorkspaceCreationForm = () => {
               alt=""
             />
             <span key={index}>{error.text}</span>
+            <button hidden className="create-link" type="submit">
+          Crear Entorno
+        </button>
           </>
         ))}
-
       <label htmlFor="channelName">Nombre del canal</label>
       <input
         className="workspace-create-input"
