@@ -11,13 +11,13 @@ const MessageCreationForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleCreateMessage(newMessage)
+    handleCreateMessage(newMessage);
     setNewMessage("");
   };
 
   const handleCreateMessage = (message) => {
     createMessage(message, id_workspace, id_channel);
-  }
+  };
 
   return (
     <form
@@ -27,27 +27,29 @@ const MessageCreationForm = () => {
       {toggleSearchGIF ? (
         <SearchGIF
           toggleSearchGIFVisibility={() => setToggleSearchGIF(!toggleSearchGIF)}
-          handleCreateMessage= {handleCreateMessage}
+          handleCreateMessage={handleCreateMessage}
         />
       ) : (
         <>
-          <input
-            className="message-text"
-            type="text"
-            placeholder="Escribe el mensaje"
-            required
-            value={newMessage}
-            onChange={(e) => setNewMessage(e.target.value)}
-          />
+          <div className="search-container">
+            <input
+              className="message-text"
+              type="text"
+              placeholder="Escribe el mensaje"
+              required
+              value={newMessage}
+              onChange={(e) => setNewMessage(e.target.value)}
+            />
+            <button
+              className="gif-button"
+              type="button"
+              onClick={() => setToggleSearchGIF(!toggleSearchGIF)}
+            >
+              gif
+            </button>
+          </div>
           <button className="send-button" type="submit">
             Enviar
-          </button>
-          <button
-            className="gif-button"
-            type="button"
-            onClick={() => setToggleSearchGIF(!toggleSearchGIF)}
-          >
-            gif
           </button>
         </>
       )}

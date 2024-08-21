@@ -55,3 +55,7 @@ h2 {
   width: 90%;
   background-color: ivory;
 }
+
+.max-width {
+  max-width: 135px;
+}

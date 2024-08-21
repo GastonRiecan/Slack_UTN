@@ -45,12 +45,12 @@
 
 @media screen and (max-width: 520px) {
   .channelCreationForm-input::placeholder {
-    font-size: 11px;
+    font-size: 10px;
   }
 }
 
 @media screen and (max-width: 500px) {
   .channelCreationForm-input::placeholder {
-    font-size: 10px;
+    font-size: 9px;
   }
 }

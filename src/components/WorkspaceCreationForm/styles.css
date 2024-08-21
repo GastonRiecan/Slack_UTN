@@ -43,6 +43,10 @@
   background-color: orangered;
 }
 
+.error-img {
+  width: 200px;
+}
+
 @media screen and (max-width: 315px) {
   .workspaceCreationForm {
     justify-content: center;

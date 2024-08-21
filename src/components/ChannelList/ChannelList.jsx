@@ -25,7 +25,7 @@ export const ChannelList = ({ workSpace, toggleMenuOpen, isMenuOpen }) => {
   };
 
   return (
-    <div className={`channel-list-container ${isMobile ? "mobile" : ""}`}>
+    <div className={`channel-list-container ${isMobile ? "mobile" : "max-width"}`}>
       {isMobile && (
         <ChannelHeader
           workSpace={workSpace}

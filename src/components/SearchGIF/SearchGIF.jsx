@@ -1,9 +1,7 @@
 import { useState } from "react";
 import GifList from "../../GifList/GifList.jsx";
 import { fetchGIFs } from "../../helpers/fetchGifs.js";
-
-
-
+import "./styles.css";
 
 const SearchGIF = ({ toggleSearchGIFVisibility, handleCreateMessage }) => {
   const [searchText, setSearchText] = useState("");
@@ -45,7 +43,9 @@ const SearchGIF = ({ toggleSearchGIFVisibility, handleCreateMessage }) => {
       >
         Cancelar
       </button>
-      <button onClick={searchGIF} type="button">Buscar</button>
+      <button className="search-gifs-btn" onClick={searchGIF} type="button">
+        Buscar
+      </button>
     </div>
   );
 };
