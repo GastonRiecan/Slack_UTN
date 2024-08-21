@@ -1,6 +1,8 @@
 body {
   background-color: #3a3a3a;
   box-sizing: border-box;
+  font-family: monospace;
+  font-size: 15px;
 }
 
 h1,
@@ -16,10 +18,4 @@ main {
   border-radius: 10px;
   height: 100vh;
   max-width: 1024px;
-}
-
-@media screen and (max-width: 430px) {
-  main {
-    background-color: aquamarine;
-  }
 }
