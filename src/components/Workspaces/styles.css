@@ -4,6 +4,7 @@
   margin: 2px;
   overflow-y: scroll;
   height: 65vh;
+  width: 80%;
 }
 
 .workspaces {
