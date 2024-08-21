@@ -1,9 +1,21 @@
 .gif-input {
   border: 1px soliod black;
   border-radius: 8px;
+  width: 60%;
 }
 
 .search-gifs-btn {
   border: 1px soliod black;
   border-radius: 8px;
+}
+
+.gif-buttons {
+  display: flex;
+  gap: 5px;
+}
+
+.search-gif-container {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
 }

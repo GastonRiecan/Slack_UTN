@@ -24,10 +24,10 @@ const WorkspaceCreationForm = () => {
   };
 
   const handleSubmit = (e) => {
-    if(errors.workspaceName.length > 0 || errors.channelName.length > 0) {
-      return
-    }
     e.preventDefault();
+    if (errors.workspaceName.length > 0 || errors.channelName.length > 0) {
+      return;
+    }
     const newWorkspace = createWorkspace(
       formData.workspaceName,
       formData.channelName
@@ -100,16 +100,17 @@ const WorkspaceCreationForm = () => {
       />
       {errors.workspaceName.length > 0 &&
         errors.workspaceName.map((error, index) => (
-          <>
-            <img className="error-img"
+          <div className="input-error" key={index}>
+            <img
+              className="error-img"
               src="https://media1.giphy.com/media/JT7Td5xRqkvHQvTdEu/200.gif?cid=0ee1e587vfpa3etcirniuqly96xmbk4df3jm6g5wdxz6g5md&ep=v1_gifs_search&rid=200.gif&ct=g"
               alt=""
             />
             <span key={index}>{error.text}</span>
             <button hidden className="create-link" type="submit">
-          Crear Entorno
-        </button>
-          </>
+              Crear Entorno
+            </button>
+          </div>
         ))}
       <label htmlFor="channelName">Nombre del canal</label>
       <input
@@ -124,13 +125,14 @@ const WorkspaceCreationForm = () => {
       />
       {errors.channelName.length > 0 &&
         errors.channelName.map((error, index) => (
-          <>
-            <img className="error-img"
+          <div className="input-error"  key={index}>
+            <img
+              className="error-img"
               src="https://media2.giphy.com/media/3oz8xLd9DJq2l2VFtu/200.gif?cid=0ee1e587vfpa3etcirniuqly96xmbk4df3jm6g5wdxz6g5md&ep=v1_gifs_search&rid=200.gif&ct=g"
               alt=""
             />
-            <span key={index}>{error.text}</span>
-          </>
+            <span>{error.text}</span>
+          </div>
         ))}
       <div className="create-section">
         <button

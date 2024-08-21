@@ -47,6 +47,12 @@
   width: 200px;
 }
 
+.input-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 @media screen and (max-width: 315px) {
   .workspaceCreationForm {
     justify-content: center;
