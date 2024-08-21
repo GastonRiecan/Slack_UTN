@@ -25,28 +25,32 @@ const SearchGIF = ({ toggleSearchGIFVisibility, handleCreateMessage }) => {
   };
 
   return (
-    <div>
-      <input
-        className="gif-input"
-        type="text"
-        placeholder="Buscar GIF"
-        required
-        value={searchText}
-        onChange={(e) => setSearchText(e.target.value)}
-        onKeyDown={(e) => handleSearchGIF(e)}
-      />
+    <>
+      <div className="search-gif-container">
+        <input
+          className="gif-input"
+          type="text"
+          placeholder="Buscar GIF"
+          required
+          value={searchText}
+          onChange={(e) => setSearchText(e.target.value)}
+          onKeyDown={(e) => handleSearchGIF(e)}
+        />
+        <div className="gif-buttons">
+          <button
+            className="gif-button"
+            type="button"
+            onClick={toggleSearchGIFVisibility}
+          >
+            Cancelar
+          </button>
+          <button className="search-gifs-btn" onClick={searchGIF} type="button">
+            Buscar
+          </button>
+        </div>
+      </div>
       <GifList gifs={gifs} handleSelectedGIF={handleSelectedGIF} />
-      <button
-        className="gif-button"
-        type="button"
-        onClick={toggleSearchGIFVisibility}
-      >
-        Cancelar
-      </button>
-      <button className="search-gifs-btn" onClick={searchGIF} type="button">
-        Buscar
-      </button>
-    </div>
+    </>
   );
 };
 

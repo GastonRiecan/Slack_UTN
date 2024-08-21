@@ -44,8 +44,8 @@ const MessageCreationForm = () => {
               className="gif-button"
               type="button"
               onClick={() => setToggleSearchGIF(!toggleSearchGIF)}
-            >
-              gif
+            ><i className="bi bi-search"></i>
+              GIF
             </button>
           </div>
           <button className="send-button" type="submit">
