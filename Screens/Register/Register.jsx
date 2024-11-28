@@ -1,5 +1,4 @@
-import React from "react";
-import RegisterForm from "../../components/RegisterForm/RegisterForm.jsx";
+import RegisterForm from "../../src/components/RegisterForm/RegisterForm";
 
 const Register = () => {
   return (

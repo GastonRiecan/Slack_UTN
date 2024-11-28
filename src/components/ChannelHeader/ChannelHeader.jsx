@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import "./styles.css";
-import { useIsMobile } from "../../hooks/useIsMobile";
+import { useIsMobile } from "../../../Hooks/useIsMobile";
 
 const ChannelHeader = ({ workSpace, toggleMenuOpen, isMenuOpen }) => {
   const isMobile = useIsMobile();

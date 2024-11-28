@@ -36,6 +36,24 @@ export const GET = async (URL_API, params) => {
     }
 }
 
+export const PUT = async (URL_API, params) => {
+    try {
+        const response = await fetch(URL_API, {
+            method: 'PUT',
+            ...params
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        return response.json();
+    } catch (error) {
+        console.log("Error en la solicitud PUT:", error);
+        throw error;
+    }
+}
+
 const getUnnauthenticatedHeaders = () => {
     const unnauthenticatedHeaders = new Headers()
     unnauthenticatedHeaders.set('Content-Type', 'application/json')

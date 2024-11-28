@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useIsMobile } from "../../hooks/useIsMobile.js";
+import { useIsMobile } from "../../../Hooks/useIsMobile.js";
 import { useParams } from "react-router-dom";
 import ChannelHeader from "../../components/ChannelHeader/ChannelHeader.jsx";
 import ChannelList from "../../components/ChannelList/ChannelList.jsx";

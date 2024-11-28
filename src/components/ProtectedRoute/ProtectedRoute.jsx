@@ -1,5 +1,4 @@
-import React, { useContext } from 'react'
-import { useAuthContext } from '../../Context/AuthContext'
+import { useAuthContext } from '../../contexts/AuthContext'
 import { Navigate, Outlet } from 'react-router-dom'
 
 //Nos llama a la ruta hija o nesteada de nuestra ruta

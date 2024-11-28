@@ -1,37 +1,13 @@
-import React from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import extractFormData from "../../utils/extractFormData.js";
+import extractFormData from "../../../utils/extractFormData.js";
 import "./styles.css";
-import { getUnnauthenticatedHeaders, POST } from "../../fetching/http.fetching.js";
-
-/* 
-
-post(direccion, body) //Devuelva el body de la response.
-
-*/
-
-
-
-
-/* const sendEmailForgot = async (form_values_object) => {
-  try {
-    const response = await fetch(
-      "http://localhost:3000/api/auth/forgot-password",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json", //Aca le indicamos al back que lo que enviamos es un JSON
-        },
-        body: JSON.stringify(form_values_object),
-      }
-    );
-    return response.json();
-  } catch (error) {
-    throw error;
-  }
-}; */
+import { getUnnauthenticatedHeaders, POST } from "../../../fetching/http.fetching.js";
 
 const ForgotPasswordForm = () => {
+  const [success, setSuccess] = useState(null);
+  const [error, setError] = useState(null);
+
   const handleSubmitLoginForm = async (e) => {
     try {
       e.preventDefault();
@@ -41,47 +17,65 @@ const ForgotPasswordForm = () => {
         email: "",
       };
       const form_values_object = extractFormData(form_fields, form_Values);
-      const body = await POST("http://localhost:3000/api/auth/forgot-password",
-        { 
+
+      const body = await POST("http://localhost:3000/api/auth/forgot-password", {
         headers: getUnnauthenticatedHeaders(),
-        body: JSON.stringify(form_values_object)
-        }
-      )
-      //Si hubiera algun error, lo imprimen usando el valor de body.
-      //Por ejemplo: pueden cambiar el estado para que aparezca un error
-      //De ser necesario cambien como responde su backend
-      if (!body.ok) {
-        //setError
+        body: JSON.stringify(form_values_object),
+      });
+
+      if (body.ok) {
+        setSuccess("¡Anda a chequear tu mail y restablece la contraseña!");
+        setError(null);
+      } else {
+        setError("Hubo un problema al enviar el correo. Intenta nuevamente.");
+        setSuccess(null);
       }
       console.log({ body });
     } catch (error) {
-      //Errores se manejan aqui
+      console.error("Error en la solicitud:", error);
+      setError("Ocurrió un error inesperado. Por favor, intenta nuevamente.");
+      setSuccess(null);
     }
   };
 
   return (
     <div>
+      {
+      success && (
+        <div className="modal success-modal">
+          <div className="modal-content">
+            <h4>Éxito</h4>
+            <p>{success}</p>
+            <button onClick={() => setSuccess(null)}>Cerrar</button>
+          </div>
+        </div>
+      )}
+
+      {error && (
+        <div className="modal error-modal">
+          <div className="modal-content">
+            <h4>Error</h4>
+            <p>{error}</p>
+            <button onClick={() => setError(null)}>Cerrar</button>
+          </div>
+        </div>
+      )}
+
       <form className="forgot-form" onSubmit={handleSubmitLoginForm}>
-        <h1>Olvide mi contraseña</h1>
+        <h1>Recupera tu contraseña</h1>
         <p>
-          Enviaremos un mail a tu email de usuario para enviarte los pasos de
-          restablecimiento de la contraseña.
+          Enviaremos los pasos para que restablezcas tu contraseña al email que ingreses aquí ⬇️.
         </p>
         <div>
           <label htmlFor="email">Ingrese su email:</label>
-          <input 
-          name="email" 
-          id="email" 
-          placeholder="pepe@gmail.com"
-          onChange={handleChangeInputValue}
-          />
+          <input name="email" id="email" placeholder="pepe@gmail.com" />
         </div>
         <button type="submit">Enviar mail</button>
         <span>
-          Si tienes cuenta puedes <Link to="/login">iniciar sesion</Link>
+          Si tienes cuenta puedes <Link to="/login">iniciar sesión</Link>
         </span>
         <span>
-          Si aun no tienes cuenta puedes <Link to="/register">Registrarte</Link>
+          Si aún no tienes cuenta puedes <Link to="/register">Registrarte</Link>
         </span>
       </form>
     </div>

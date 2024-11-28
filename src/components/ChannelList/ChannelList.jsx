@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useIsMobile } from "../../hooks/useIsMobile";
+import { useIsMobile } from "../../../Hooks/useIsMobile";
 import ChannelHeader from "../ChannelHeader/ChannelHeader";
 import ChannelCreationForm from "../ChannelCreationForm/ChannelCreationForm";
 import { useWorkspacesContext } from "../../contexts/WorkspacesContext";
