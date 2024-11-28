@@ -49,7 +49,15 @@ const SearchGIF = ({ toggleSearchGIFVisibility, handleCreateMessage }) => {
           </button>
         </div>
       </div>
-      <GifList gifs={gifs} handleSelectedGIF={handleSelectedGIF} />
+      <div>
+        {gifs.length > 0 ? (
+          <GifList gifs={gifs} handleSelectedGIF={handleSelectedGIF} />
+        ) : (
+          <span className="italic">
+            Aquí aparecerán tus gifs...
+          </span>
+        )}
+      </div>
     </>
   );
 };
