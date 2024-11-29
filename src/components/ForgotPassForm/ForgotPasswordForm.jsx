@@ -23,7 +23,9 @@ const ForgotPasswordForm = () => {
         body: JSON.stringify(form_values_object),
       });
 
-      if (body.ok) {
+      console.log("Respuesta del backend:", body);
+
+      if (body.response.ok) {
         setSuccess("¡Anda a chequear tu mail y restablece la contraseña!");
         setError(null);
       } else {

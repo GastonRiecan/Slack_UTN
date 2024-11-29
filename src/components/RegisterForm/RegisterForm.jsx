@@ -1,8 +1,7 @@
-import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./styles.css";
 import useCustomForm from "../../../Hooks/useCustomForm.jsx";
-import { getUnnauthenticatedHeaders, POST } from "../../../fetching/http.fetching.js";
+import { getUnnauthenticatedHeaders, POST,  } from "../../../fetching/http.fetching.js";
 
 const RegisterForm = () => {
   const form_fields = {
@@ -12,46 +11,35 @@ const RegisterForm = () => {
   };
 
   const { form_values_state, handleChangeInputValue } = useCustomForm(form_fields);
-  const navigate = useNavigate();
-  const [error, setError] = useState(null); 
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
+  const navigate = useNavigate()
+  
   const handleSubmitRegisterForm = async (e) => {
     try {
-      e.preventDefault();
-      setIsSubmitting(true);
-      setError(null);
+    e.preventDefault();
 
-      const response = await POST("http://localhost:3000/api/auth/register", {
+    const body = await POST("http://localhost:3000/api/auth/register",
+      {
         headers: getUnnauthenticatedHeaders(),
-        body: JSON.stringify(form_values_state),
-      });
-
-      if (response.ok) {
-        navigate("/login");
-      } else {
-        const errorMessage = await response.json();
-        setError(errorMessage.message || "Hubo un error al registrar el usuario.");
+        body: JSON.stringify(form_values_state)
       }
-    } catch (error) {
-      console.error("Error al registrar usuario:", error);
-      setError("Error desconocido. Intenta nuevamente.");
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
+    )
+    
 
+    if (!body.ok) {
+      navigate('/login')
+    }
+    console.log({ body });
+  } catch (error) {
+    //Errores se manejan aqui
+    console.error(error);
+    
+  }
+
+      
+  };
   return (
     <div className="register-form">
       <h1>Registrate en nuestra web</h1>
-      
-      {error && (
-        <div className="error-modal">
-          <p>{error}</p>
-          <button onClick={() => setError(null)}>Cerrar</button>
-        </div>
-      )}
-      
       <form onSubmit={handleSubmitRegisterForm}>
         <div>
           <label htmlFor="name">Ingrese su nombre:</label>
@@ -80,12 +68,8 @@ const RegisterForm = () => {
             onChange={handleChangeInputValue}
           />
         </div>
-
-        <button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? "Registrando..." : "Registrar"}
-        </button>
+        <button type="submit">Registrar</button>
       </form>
-
       <span>
         Si ya tienes cuenta puedes ir a <Link to="/login">Login</Link>
       </span>
