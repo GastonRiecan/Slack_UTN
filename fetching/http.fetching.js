@@ -54,6 +54,25 @@ export const PUT = async (URL_API, params) => {
     }
 }
 
+export const DELETE = async (URL_API, params) => {
+    try {
+        const response = await fetch(URL_API, {
+            method: 'DELETE',
+            ...params
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        return response.json();
+    } catch (error) {
+        console.log("Error en la solicitud DELETE:", error);
+        throw error;
+    }
+}
+
+
 const getUnnauthenticatedHeaders = () => {
     const unnauthenticatedHeaders = new Headers()
     unnauthenticatedHeaders.set('Content-Type', 'application/json')

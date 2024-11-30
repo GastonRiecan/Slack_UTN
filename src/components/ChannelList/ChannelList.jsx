@@ -25,7 +25,9 @@ export const ChannelList = ({ workSpace, toggleMenuOpen, isMenuOpen }) => {
   };
 
   return (
-    <div className={`channel-list-container ${isMobile ? "mobile" : "max-width"}`}>
+    <div
+      className={`channel-list-container ${isMobile ? "mobile" : "max-width"}`}
+    >
       {isMobile && (
         <ChannelHeader
           workSpace={workSpace}
@@ -55,7 +57,11 @@ export const ChannelList = ({ workSpace, toggleMenuOpen, isMenuOpen }) => {
       ) : (
         <button onClick={() => setIsFormOpen(!isFormOpen)}>Crear Canal</button>
       )}
+      <div>
+        <span>Contactos</span>
+      </div>
     </div>
+    //aca va mi lista de contactos!!
   );
 };
 

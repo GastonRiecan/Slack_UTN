@@ -1,4 +1,3 @@
-import React from "react";
 import { useWorkspacesContext } from "../../contexts/WorkspacesContext";
 import { Link } from "react-router-dom";
 import "./styles.css";
