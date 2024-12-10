@@ -1,13 +1,9 @@
-//Guardar globalmente un estado que dice si estamos o no autentificados.
-//Decinoms autentificado a cualquier usuario que tenga un acces-token cargado en el local/sessionStorage.
-
 import { useState, useEffect, createContext, useContext } from "react";
 
 export const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
   const access_token = sessionStorage.getItem("access_token");
-  //Estado booleano
   const [isAuthenticatedUser, setIsAuthenticatedUser] = useState(
     Boolean(access_token)
   );
@@ -37,5 +33,5 @@ export const AuthContextProvider = ({ children }) => {
 };
 
 export const useAuthContext = () => {
-    return useContext(AuthContext) // Devuelve un objeto con { logout, isAuthenticatedUser }
+    return useContext(AuthContext) 
 }

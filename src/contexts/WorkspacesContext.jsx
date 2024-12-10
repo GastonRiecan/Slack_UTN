@@ -39,7 +39,7 @@ export const WorkspacesContextProvider = ({ children }) => {
 
     try {
       const response = await POST(
-        "http://localhost:3000/api/workspaces/create",
+        "https://back-drab-three.vercel.app/api/workspaces/create",
         {
           headers: getAuthenticatedHeaders(),
           body: JSON.stringify(newWorkspace),
@@ -66,7 +66,7 @@ export const WorkspacesContextProvider = ({ children }) => {
 
     try {
       const response = await POST(
-        `http://localhost:3000/api/workspaces/${workspaceId}/channels`,
+        `https://back-drab-three.vercel.app/api/workspaces/${workspaceId}/channels`,
         {
           headers: getAuthenticatedHeaders(),
           body: JSON.stringify(newChannel),
@@ -103,7 +103,7 @@ export const WorkspacesContextProvider = ({ children }) => {
 
     try {
       const response = await POST(
-        `http://localhost:3000/api/messages/${workspaceId}/${channelId}/create`,
+        `https://back-drab-three.vercel.app/api/messages/${workspaceId}/${channelId}/create`,
         {
           headers: getAuthenticatedHeaders(),
           body: JSON.stringify(newMessage),

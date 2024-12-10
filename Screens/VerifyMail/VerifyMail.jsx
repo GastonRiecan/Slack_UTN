@@ -4,7 +4,7 @@ import { GET, getUnnauthenticatedHeaders } from "../../fetching/http.fetching";
 export const VerifyMail = () => {
     const { verificationToken } = useParams()
 
-    const response = GET(`http://localhost:3000/api/auth/verify/${verificationToken}`, {
+    const response = GET(`https://back-drab-three.vercel.app/api/auth/verify/${verificationToken}`, {
         headers: getUnnauthenticatedHeaders(),
     })
     console.log(response);
@@ -16,11 +16,11 @@ export const VerifyMail = () => {
                 response.ok
                 ?
                 <h2>
-                    Verificado
+                    Verificado!!!
                 </h2>
                 :
                 <h2>
-                    Tu email se verifico con exito!!! Anda a loguearte!!! 👌😊👍🙌
+                    Tu email se verifico con exito!!! Anda a loguearte!!!👍😊👌🙌
                 </h2>
             }
         </div>
