@@ -1,4 +1,3 @@
-import recat from "react";
 import { useParams } from "react-router-dom";
 import { GET, getUnnauthenticatedHeaders } from "../../fetching/http.fetching";
 
