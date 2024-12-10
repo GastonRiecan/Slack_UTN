@@ -21,7 +21,7 @@ export const VerifyMail = () => {
                 </h2>
                 :
                 <h2>
-                    No se logro verificar el mail
+                    Tu email se verifico con exito!!! Anda a loguearte!!! 👌😊👍🙌
                 </h2>
             }
         </div>
