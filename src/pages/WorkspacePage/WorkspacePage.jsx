@@ -50,7 +50,7 @@ const WorkspacePage = () => {
   
   const handleEditMessage = async (messageId, newContent) => {
     try {
-      const response = await PUT(`http://localhost:3000/api/messages/${id_workspace}/${id_channel}/${messageId}`, {
+      const response = await PUT(`VITE_API_URL/api/messages/${id_workspace}/${id_channel}/${messageId}`, {
         headers: getAuthenticatedHeaders(),
         body: JSON.stringify({ content: newContent }),
         workSpace: currentWorkSpace
@@ -74,7 +74,7 @@ const WorkspacePage = () => {
 
   const handleDeleteMessage = async (messageId) => {
     try {
-      const response = await DELETE(`http://localhost:3000/api/messages//${id_workspace}/${id_channel}/${messageId}`, {
+      const response = await DELETE(`VITE_API_URL/api/messages//${id_workspace}/${id_channel}/${messageId}`, {
         headers: getAuthenticatedHeaders()
       });
 

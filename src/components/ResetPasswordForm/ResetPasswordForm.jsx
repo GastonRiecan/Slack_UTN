@@ -23,7 +23,7 @@ const ResetPasswordForm = () => {
 
     setIsSubmitting(true); 
 
-    PUT(`http://localhost:3000/api/auth/reset-password/${reset_token}`, {
+    PUT(`VITE_API_URL/api/auth/reset-password/${reset_token}`, {
       headers: getUnnauthenticatedHeaders(),  
       body: JSON.stringify(form_values_object),  
     })
