@@ -26,6 +26,7 @@ const RegisterForm = () => {
     
 
     if (!body.ok) {
+      alert("Registro Exitoso, anda a revisar tu casilla de mail!!");
       navigate('/login')
     }
     console.log({ body });
