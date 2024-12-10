@@ -17,7 +17,7 @@ const RegisterForm = () => {
     try {
     e.preventDefault();
 
-    const body = await POST("http://localhost:3000/api/auth/register",
+    const body = await POST("https://back-drab-three.vercel.app/api/auth/register",
       {
         headers: getUnnauthenticatedHeaders(),
         body: JSON.stringify(form_values_state)
