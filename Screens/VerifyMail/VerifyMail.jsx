@@ -5,6 +5,9 @@ import { useEffect, useState } from "react";
 export const VerifyMail = () => {
   const { verificationToken } = useParams();
 
+	console.log(verificationToken);
+	
+
   const [responseStatus, setResponseStatus] = useState(null);
 
   useEffect(() => {
@@ -18,7 +21,7 @@ export const VerifyMail = () => {
         );
 
         if (response && response.ok) {
-          setResponseStatus("Verificado!!!");
+          setResponseStatus("Verificado!!! Anda a loguearte!!😊🙌👌👍❤️");
         } else {
           setResponseStatus("Error al verificar tu correo.");
         }
