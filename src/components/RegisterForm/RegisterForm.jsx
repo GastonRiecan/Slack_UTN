@@ -17,7 +17,7 @@ const RegisterForm = () => {
     try {
     e.preventDefault();
 
-    const response = await POST("https://back-drab-three.vercel.app/api/auth/register",
+    const body = await POST("https://back-drab-three.vercel.app/api/auth/register",
       {
         headers: getUnnauthenticatedHeaders(),
         body: JSON.stringify(form_values_state)
@@ -25,13 +25,16 @@ const RegisterForm = () => {
     )
     
 
-    if (response.ok) {
-      sessionStorage.setItem('access_token', response.payload.accessToken);
+    if (body.ok) {
+
+      console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',body.payload.accessToken);
+      
+      sessionStorage.setItem('access_token', body.payload.accessToken);
       
       alert("Registro Exitoso, anda a revisar tu casilla de mail!!");
       navigate('/login');
     } else {
-      console.error("Error en el registro:", response.message);
+      console.error("Error en el registro:", body.message);
     }
   } catch (error) {
     console.error(error);
