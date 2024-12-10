@@ -8,6 +8,7 @@ const LoginForm = () => {
   const [error, setError] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
+  const backendUrl = import.meta.env.VITE_API_URL;
 
   const handleSubmitLoginForm = async (e) => {
     try {
@@ -23,7 +24,7 @@ const LoginForm = () => {
       };
       const form_values_object = extractFormData(form_fields, form_Values);
 
-      const response = await POST("https://back-drab-three.vercel.app/api/auth/login", {
+      const response = await POST(`${backendUrl}/api/auth/login`, {
         headers: getAuthenticatedHeaders(),
         body: JSON.stringify(form_values_object),
       });

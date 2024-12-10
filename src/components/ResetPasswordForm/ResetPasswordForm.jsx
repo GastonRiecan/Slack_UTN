@@ -6,8 +6,7 @@ import "./styles.css";
 
 const ResetPasswordForm = () => {
   const { reset_token } = useParams();
-  console.log(reset_token);
-
+  const backendUrl = import.meta.env.VITE_API_URL;
   const [error, setError] = useState(null);  
   const [success, setSuccess] = useState(null);  
   const [isSubmitting, setIsSubmitting] = useState(false);  
@@ -23,7 +22,7 @@ const ResetPasswordForm = () => {
 
     setIsSubmitting(true); 
 
-    PUT(`VITE_API_URL/api/auth/reset-password/${reset_token}`, {
+    PUT(`${backendUrl}/api/auth/reset-password/${reset_token}`, {
       headers: getUnnauthenticatedHeaders(),  
       body: JSON.stringify(form_values_object),  
     })

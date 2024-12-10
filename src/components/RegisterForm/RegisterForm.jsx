@@ -12,12 +12,13 @@ const RegisterForm = () => {
 
   const { form_values_state, handleChangeInputValue } = useCustomForm(form_fields);
   const navigate = useNavigate()
+  const backendUrl = import.meta.env.VITE_API_URL;
   
   const handleSubmitRegisterForm = async (e) => {
     try {
     e.preventDefault();
 
-    const body = await POST("https://back-drab-three.vercel.app/api/auth/register",
+    const body = await POST(`${backendUrl}/api/auth/register`,
       {
         headers: getUnnauthenticatedHeaders(),
         body: JSON.stringify(form_values_state)
@@ -26,9 +27,7 @@ const RegisterForm = () => {
     
 
     if (body.ok) {
-
-      console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',body.payload.accessToken);
-      
+            
       sessionStorage.setItem('access_token', body.payload.accessToken);
       
       alert("Registro Exitoso, anda a revisar tu casilla de mail!!");

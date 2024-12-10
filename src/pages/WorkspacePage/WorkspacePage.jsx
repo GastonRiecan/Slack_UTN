@@ -9,7 +9,10 @@ import MessageCreationForm from "../../components/MessageCreationForm/MessageCre
 import { useState, useEffect } from "react";
 import { PUT, DELETE, getAuthenticatedHeaders } from "../../../fetching/http.fetching.js";
 
+
 const WorkspacePage = () => {
+
+  const backendUrl = import.meta.env.VITE_API_URL;
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const isMobile = useIsMobile();
   const { workSpaces, createMessage } = useWorkspacesContext(); 
@@ -50,7 +53,7 @@ const WorkspacePage = () => {
   
   const handleEditMessage = async (messageId, newContent) => {
     try {
-      const response = await PUT(`VITE_API_URL/api/messages/${id_workspace}/${id_channel}/${messageId}`, {
+      const response = await PUT(`${backendUrl}/api/messages/${id_workspace}/${id_channel}/${messageId}`, {
         headers: getAuthenticatedHeaders(),
         body: JSON.stringify({ content: newContent }),
         workSpace: currentWorkSpace
@@ -74,7 +77,7 @@ const WorkspacePage = () => {
 
   const handleDeleteMessage = async (messageId) => {
     try {
-      const response = await DELETE(`VITE_API_URL/api/messages//${id_workspace}/${id_channel}/${messageId}`, {
+      const response = await DELETE(`${backendUrl}/api/messages//${id_workspace}/${id_channel}/${messageId}`, {
         headers: getAuthenticatedHeaders()
       });
 

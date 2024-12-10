@@ -7,6 +7,8 @@ import { getUnnauthenticatedHeaders, POST } from "../../../fetching/http.fetchin
 const ForgotPasswordForm = () => {
   const [success, setSuccess] = useState(null);
   const [error, setError] = useState(null);
+  const backendUrl = import.meta.env.VITE_API_URL;
+  
 
   const handleSubmitLoginForm = async (e) => {
     try {
@@ -18,7 +20,7 @@ const ForgotPasswordForm = () => {
       };
       const form_values_object = extractFormData(form_fields, form_Values);
 
-      const body = await POST("https://back-drab-three.vercel.app/api/auth/forgot-password", {
+      const body = await POST(`${backendUrl}/api/auth/forgot-password`, {
         headers: getUnnauthenticatedHeaders(),
         body: JSON.stringify(form_values_object),
       });

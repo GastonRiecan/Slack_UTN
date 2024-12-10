@@ -10,6 +10,8 @@ export const WorkspacesContextProvider = ({ children }) => {
   const [workSpacesData, setWorkSpacesData] = useState(workSpaces);
   const [isLoading, setIsLoading] = useState(true);
 
+  const backendUrl = import.meta.env.VITE_API_URL;
+
   useEffect(() => {
     const fetchWorkspaces = async () => {
       try {
@@ -39,7 +41,7 @@ export const WorkspacesContextProvider = ({ children }) => {
 
     try {
       const response = await POST(
-        "https://back-drab-three.vercel.app/api/workspaces/create",
+        `${backendUrl}/api/workspaces/create`,
         {
           headers: getAuthenticatedHeaders(),
           body: JSON.stringify(newWorkspace),
@@ -66,7 +68,7 @@ export const WorkspacesContextProvider = ({ children }) => {
 
     try {
       const response = await POST(
-        `https://back-drab-three.vercel.app/api/workspaces/${workspaceId}/channels`,
+        `${backendUrl}/api/workspaces/${workspaceId}/channels`,
         {
           headers: getAuthenticatedHeaders(),
           body: JSON.stringify(newChannel),
@@ -103,7 +105,7 @@ export const WorkspacesContextProvider = ({ children }) => {
 
     try {
       const response = await POST(
-        `https://back-drab-three.vercel.app/api/messages/${workspaceId}/${channelId}/create`,
+        `${backendUrl}/api/messages/${workspaceId}/${channelId}/create`,
         {
           headers: getAuthenticatedHeaders(),
           body: JSON.stringify(newMessage),

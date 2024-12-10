@@ -1,9 +1,11 @@
 import { GET, getAuthenticatedHeaders, POST } from "../../fetching/http.fetching";
 
+const backendUrl = import.meta.env.VITE_API_URL;
 
 export const getData = async () => {
+
 	try {
-		const response = await GET(`https://back-drab-three.vercel.app/api/workspaces/get`, {
+		const response = await GET(`${backendUrl}/api/workspaces/get`, {
 			headers: getAuthenticatedHeaders(),
 		});
 
@@ -27,7 +29,7 @@ export const getData = async () => {
 
 export const setData = async (data) => {
 	try {
-		const response = await POST("https://back-drab-three.vercel.app/api/workspaces/create", {
+		const response = await POST(`${backendUrl}/api/workspaces/create`, {
 			headers: getAuthenticatedHeaders(),
 			body: JSON.stringify(data),
 		});
