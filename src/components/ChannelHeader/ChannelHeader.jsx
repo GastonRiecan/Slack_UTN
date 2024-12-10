@@ -12,7 +12,7 @@ const ChannelHeader = ({ workSpace, toggleMenuOpen, isMenuOpen }) => {
 
   return (
     <header>
-      <h2>{workSpace.name}</h2>
+     {/*  <h2>{workSpace.name}</h2> */}
       <Link className="salir-link" to="/">
         <h2>Salir</h2>
       </Link>

@@ -4,10 +4,14 @@ import { useIsMobile } from "../../../Hooks/useIsMobile";
 import ChannelHeader from "../ChannelHeader/ChannelHeader";
 import ChannelCreationForm from "../ChannelCreationForm/ChannelCreationForm";
 import { useWorkspacesContext } from "../../contexts/WorkspacesContext";
-
 import "./styles.css";
+import PropTypes from "prop-types";
 
 export const ChannelList = ({ workSpace, toggleMenuOpen, isMenuOpen }) => {
+
+  console.log("EN CHANNEL LIST -->", workSpace);
+  
+  
   const [isFormOpen, setIsFormOpen] = useState(false);
   const { id_channel } = useParams();
   const isMobile = useIsMobile();
@@ -15,19 +19,17 @@ export const ChannelList = ({ workSpace, toggleMenuOpen, isMenuOpen }) => {
   const { createChannel } = useWorkspacesContext();
 
   const handleClick = (channel_id) => {
-    navigate(`/workspace/${workSpace.id}/${channel_id}`);
+    navigate(`/workspace/${workSpace._id}/${channel_id}`);
     if (isMenuOpen) toggleMenuOpen();
   };
 
   const handleCreateChannel = (channelName) => {
-    const newChannel = createChannel(workSpace.id, channelName);
-    navigate(`/workspace/${workSpace.id}/${newChannel.id}`);
+    const newChannel = createChannel(workSpace._id, channelName);
+    navigate(`/workspace/${workSpace._id}/${newChannel.id}`);
   };
 
   return (
-    <div
-      className={`channel-list-container ${isMobile ? "mobile" : "max-width"}`}
-    >
+    <div className={`channel-list-container ${isMobile ? "mobile" : "max-width"}`}>
       {isMobile && (
         <ChannelHeader
           workSpace={workSpace}
@@ -40,9 +42,7 @@ export const ChannelList = ({ workSpace, toggleMenuOpen, isMenuOpen }) => {
         {workSpace.channels.map((channel) => (
           <p
             onClick={() => handleClick(channel.id)}
-            className={`channel-link ${
-              id_channel == channel.id ? "current-channel" : ""
-            }`}
+            className={`channel-link ${id_channel == channel.id ? "current-channel" : ""}`}
             key={channel.id}
           >
             #{channel.name}
@@ -57,12 +57,16 @@ export const ChannelList = ({ workSpace, toggleMenuOpen, isMenuOpen }) => {
       ) : (
         <button onClick={() => setIsFormOpen(!isFormOpen)}>Crear Canal</button>
       )}
-      <div>
-        <span>Contactos</span>
-      </div>
     </div>
-    //aca va mi lista de contactos!!
   );
+};
+
+ChannelList.propTypes = {
+  workSpace: PropTypes.shape({
+    _id: PropTypes.string.isRequired, 
+    name: PropTypes.string.isRequired,
+    channels: PropTypes.array.isRequired,
+  }).isRequired,
 };
 
 export default ChannelList;

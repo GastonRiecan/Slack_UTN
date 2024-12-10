@@ -9,7 +9,6 @@ const useCustomForm = (form_fields) => {
         console.log("Input Name:", input_name, "Input Value:", input_value);
         setFormValuesState(
             (prev_form_values_state) => {
-                //Lo que retorne sta callback se guarda como  nuevo valor del estado
                 return {
                     ...prev_form_values_state,
                     [input_name]: input_value

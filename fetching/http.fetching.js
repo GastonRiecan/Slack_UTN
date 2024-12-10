@@ -91,4 +91,3 @@ const getAuthenticatedHeaders = () => {
 
 
 export { getAuthenticatedHeaders, getUnnauthenticatedHeaders }
-//Crear GET, PUT, DELETE

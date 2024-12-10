@@ -1,15 +1,19 @@
 import { useEffect, useState } from "react";
-import { GET, DELETE } from "../../../fetching/http.fetching";
+import { GET, DELETE, getAuthenticatedHeaders } from "../../../fetching/http.fetching";
 import { useNavigate } from "react-router-dom";
+import AddContactForm from "../AddContactForm/AddContactForm"; 
 
 const ContactList = ({ workspaceId }) => {
   const [contacts, setContacts] = useState([]);
+  const [showCreateForm, setShowCreateForm] = useState(false); 
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchContacts = async () => {
       try {
-        const response = await GET(`/api/contacts/${workspaceId}`);
+        const response = await GET(`http://localhost:3000/api/contacts/get/${workspaceId}`, {
+          headers: getAuthenticatedHeaders(),
+        });
         setContacts(response.contacts);
       } catch (error) {
         console.error("Error al obtener los contactos", error);
@@ -26,7 +30,9 @@ const ContactList = ({ workspaceId }) => {
   const handleDelete = async (contactId) => {
     if (window.confirm("¿Estás seguro de que deseas eliminar este contacto?")) {
       try {
-        const response = await DELETE(`/api/contacts/${contactId}`);
+        const response = await DELETE(`/api/contacts/${contactId}`, {
+          headers: { "Content-Type": "application/json" },
+        });
 
         if (response.ok) {
           setContacts(contacts.filter((contact) => contact._id !== contactId));
@@ -44,6 +50,13 @@ const ContactList = ({ workspaceId }) => {
   return (
     <div>
       <h2>Lista de Contactos</h2>
+
+      <button onClick={() => setShowCreateForm(!showCreateForm)}>
+        {showCreateForm ? "Cancelar" : "Crear Nuevo Contacto"}
+      </button>
+
+      {showCreateForm && <AddContactForm workspaceId={workspaceId} refreshContacts={() => setContacts([])} />}
+
       <ul>
         {contacts.map((contact) => (
           <li key={contact._id}>

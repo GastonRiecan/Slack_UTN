@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import extractFormData from "../../../utils/extractFormData.js";
 import "./styles.css";
-import { POST, getUnnauthenticatedHeaders } from "../../../fetching/http.fetching.js";
+import { POST, getAuthenticatedHeaders } from "../../../fetching/http.fetching.js";
 
 const LoginForm = () => {
   const [error, setError] = useState(null);
@@ -23,8 +23,8 @@ const LoginForm = () => {
       };
       const form_values_object = extractFormData(form_fields, form_Values);
 
-      const response = await POST("http://localhost:3000/api/auth/login", {
-        headers: getUnnauthenticatedHeaders(),
+      const response = await POST("https://back-drab-three.vercel.app/api/auth/login", {
+        headers: getAuthenticatedHeaders(),
         body: JSON.stringify(form_values_object),
       });
 
@@ -32,7 +32,7 @@ const LoginForm = () => {
         const access_token = response.payload.token;
         sessionStorage.setItem("access_token", access_token);
         sessionStorage.setItem("user_info", JSON.stringify(response.payload.user));
-        navigate("/home");
+        navigate(`/home/${response.payload.user.id}`);
       } else {
         setError(response.payload.detail);
       }

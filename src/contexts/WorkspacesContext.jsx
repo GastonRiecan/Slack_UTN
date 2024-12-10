@@ -1,97 +1,146 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { getData, setData } from "../helpers/localStorage";
+import { getData } from "../helpers/localStorage";
+import { getAuthenticatedHeaders, POST } from "../../fetching/http.fetching";
 
 export const WorkspacesContext = createContext();
 
-const workSpaces = getData();
+const workSpaces = (await getData()) || [];
 
 export const WorkspacesContextProvider = ({ children }) => {
   const [workSpacesData, setWorkSpacesData] = useState(workSpaces);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    setData(workSpacesData);
-  }, [workSpacesData]);
+    const fetchWorkspaces = async () => {
+      try {
+        const data = await getData();
+        setWorkSpacesData(data);
+      } catch (error) {
+        console.error("Error al obtener los workspaces:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-  const createWorkspace = (workspaceName, channelName) => {
+    fetchWorkspaces();
+  }, []);
+
+  const createWorkspace = async (workspaceName, channelName) => {
     const newWorkspace = {
-      id: crypto.randomUUID(),
       name: workspaceName,
       thumbnail: "defaultWorkSpaceImage.png",
       channels: [
         {
-          id: crypto.randomUUID(),
           name: channelName,
           messages: [],
         },
       ],
     };
-    setWorkSpacesData([...workSpacesData, newWorkspace]);
-    return newWorkspace;
+
+    try {
+      const response = await POST(
+        "http://localhost:3000/api/workspaces/create",
+        {
+          headers: getAuthenticatedHeaders(),
+          body: JSON.stringify(newWorkspace),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Error al crear el workspace");
+      }
+
+      const savedWorkspace = await response.json();
+      setWorkSpacesData([...workSpacesData, savedWorkspace]);
+      return savedWorkspace;
+    } catch (error) {
+      console.error("Error al crear el workspace:", error);
+    }
   };
 
-  const createChannel = (workspaceId, channelName) => {
+  const createChannel = async (workspaceId, channelName) => {
     const newChannel = {
-      id: crypto.randomUUID(),
       name: channelName,
       messages: [],
     };
-    const currentWorkSpace = workSpacesData.find(
-      (workSpace) => workSpace.id == workspaceId
-    );
 
-    const updatedCurrentWorkSpace = {
-      ...currentWorkSpace,
-      channels: [...currentWorkSpace.channels, newChannel],
-    };
+    try {
+      const response = await POST(
+        `http://localhost:3000/api/workspaces/${workspaceId}/channels`,
+        {
+          headers: getAuthenticatedHeaders(),
+          body: JSON.stringify(newChannel),
+        }
+      );
 
-    const wsIndex = workSpacesData.findIndex(
-      (w) => w.id == currentWorkSpace.id
-    );
-    const updatedWorkSpacesData = [...workSpacesData];
-    updatedWorkSpacesData[wsIndex] = updatedCurrentWorkSpace;
-    setWorkSpacesData(updatedWorkSpacesData);
-    return newChannel;
+      if (!response.ok) {
+        throw new Error("Error al crear el canal");
+      }
+
+      const updatedWorkspace = await response.json();
+      const updatedWorkSpacesData = workSpacesData.map((workspace) =>
+        workspace.id === workspaceId ? updatedWorkspace : workspace
+      );
+      setWorkSpacesData(updatedWorkSpacesData);
+
+      return updatedWorkspace.channels.find(
+        (channel) => channel.name === channelName
+      );
+    } catch (error) {
+      console.error("Error al crear el canal:", error);
+      return null;
+    }
   };
 
-  const createMessage = (message, idWorkspace, idChannel) => {
+  const createMessage = async (message, workspaceId, channelId) => {
     const newMessage = {
-      id: crypto.randomUUID(),
       userID: "1",
-      timeStamp: new Date().toLocaleString().slice(0, -3),
+      timeStamp: new Date().toISOString(),
       content: message,
+      workspaceId,
+      channelId,
     };
 
-    const currentWorkSpace = workSpacesData.find(
-      (workSpace) => workSpace.id == idWorkspace
-    );
+    try {
+      const response = await POST(
+        `http://localhost:3000/api/messages/${workspaceId}/${channelId}/create`,
+        {
+          headers: getAuthenticatedHeaders(),
+          body: JSON.stringify(newMessage),
+        }
+      );
 
-    const currentChannel = currentWorkSpace.channels.find(
-      (channel) => channel.id == idChannel
-    );
+      if (!response.ok) {
+        throw new Error("Error al agregar el mensaje");
+      }
 
-    const updatedCurrentChannel = {
-      ...currentChannel,
-      messages: [...currentChannel.messages, newMessage],
-    };
+      const updatedMessage = await response.json();
 
-    const chIndex = currentWorkSpace.channels.findIndex(
-      (ch) => ch.id == updatedCurrentChannel.id
-    );
+      setWorkSpacesData((prevWorkSpaces) =>
+        prevWorkSpaces.map((workspace) => {
+          if (workspace._id === workspaceId) {
+            return {
+              ...workspace,
+              channels: workspace.channels.map((channel) => {
+                if (channel.id === channelId) {
+                  return {
+                    ...channel,
+                    messages: [...channel.messages, updatedMessage], 
+                  };
+                }
+                return channel;
+              }),
+            };
+          }
+          return workspace;
+        })
+      );
 
-    const updatedChannels = [...currentWorkSpace.channels];
-    updatedChannels[chIndex] = updatedCurrentChannel;
-
-    const updatedCurrentWorkSpace = {
-      ...currentWorkSpace,
-      channels: updatedChannels,
-    };
-
-    const wsIndex = workSpacesData.findIndex(
-      (w) => w.id == currentWorkSpace.id
-    );
-    const updatedWorkSpacesData = [...workSpacesData];
-    updatedWorkSpacesData[wsIndex] = updatedCurrentWorkSpace;
-    setWorkSpacesData(updatedWorkSpacesData);
+      return updatedMessage;
+    } catch (error) {
+      console.error("Error al crear el mensaje:", error);
+      return null;
+    }
   };
 
   return (
@@ -101,6 +150,7 @@ export const WorkspacesContextProvider = ({ children }) => {
         createWorkspace,
         createChannel,
         createMessage,
+        isLoading,
       }}
     >
       {children}

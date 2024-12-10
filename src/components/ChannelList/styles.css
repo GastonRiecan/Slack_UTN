@@ -59,3 +59,13 @@ h2 {
 .max-width {
   max-width: 135px;
 }
+
+.contact-button {
+  border: 1px solid black;
+  border-radius: 8px;
+  padding: 2px;
+  width: 90%;
+  font-size: 15px;
+  margin: 8px;
+  background-color: yellowgreen;
+}

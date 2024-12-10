@@ -2,19 +2,30 @@ import { useWorkspacesContext } from "../../contexts/WorkspacesContext";
 import { Link } from "react-router-dom";
 import "./styles.css";
 
-const Workspaces = () => {
-  const { workSpaces } = useWorkspacesContext();
+const Workspaces = ({user_id}) => {
+  const { workSpaces, isLoading } = useWorkspacesContext();
+
+  console.log('En workspaces--->', workSpaces);
+  
+
+  if (isLoading) {
+    return <p>Cargando...</p>;
+  }
+
+  if (workSpaces.length === 0) {
+    return <p>No hay workspaces disponibles</p>;
+  }
 
   return (
     <>
       <div className="section-wrapper">
         {workSpaces.map((workSpace) => (
-          <section className="workspaces" key={workSpace.id}>
-            <img src={`images/workspaces/${workSpace.thumbnail}`} />
+          <section className="workspaces" key={workSpace._id}>
+            <img src={workSpace.thumbnail} />
             <span>{workSpace.name}</span>
             <Link
               className="entrar-link"
-              to={`/workspace/${workSpace.id}/${workSpace.channels[0].id}`}
+              to={`/workspace/${workSpace._id}/${workSpace.channels[0].id}`}
             >
               <h2>Entrar</h2>
             </Link>
