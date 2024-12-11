@@ -13,6 +13,9 @@ const RegisterForm = () => {
   const { form_values_state, handleChangeInputValue } = useCustomForm(form_fields);
   const navigate = useNavigate()
   const backendUrl = import.meta.env.VITE_API_URL;
+
+  console.log("BACKEND URL",backendUrl);
+  
   
   const handleSubmitRegisterForm = async (e) => {
     try {
