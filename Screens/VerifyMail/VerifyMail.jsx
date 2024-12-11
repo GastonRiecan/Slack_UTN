@@ -4,17 +4,15 @@ import { useEffect, useState } from "react";
 
 export const VerifyMail = () => {
   const { verificationToken } = useParams();
-
-	console.log(verificationToken);
-	
-
+  
   const [responseStatus, setResponseStatus] = useState(null);
-
+  
   useEffect(() => {
     const verifyEmail = async () => {
+    const backendUrl = import.meta.env.VITE_API_URL;
       try {
         const response = await GET(
-          `https://back-drab-three.vercel.app/api/auth/verify/${verificationToken}`,
+          `${backendUrl}/api/auth/verify/${verificationToken}`,
           {
             headers: getUnnauthenticatedHeaders(),
           }

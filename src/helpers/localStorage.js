@@ -16,10 +16,7 @@ export const getData = async () => {
 		}
 		const data = await response.payload.workspaces;
 
-		console.log('en getData---->', data);
-
-
-		return data
+		return data;
 
 	} catch (error) {
 		console.error("Error al obtener los datos de la API:", error);

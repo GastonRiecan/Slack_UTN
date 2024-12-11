@@ -3,11 +3,8 @@ import { getData } from "../helpers/localStorage";
 import { getAuthenticatedHeaders, POST } from "../../fetching/http.fetching";
 
 export const WorkspacesContext = createContext();
-
-const workSpaces = (await getData()) || [];
-
 export const WorkspacesContextProvider = ({ children }) => {
-  const [workSpacesData, setWorkSpacesData] = useState(workSpaces);
+  const [workSpacesData, setWorkSpacesData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   const backendUrl = import.meta.env.VITE_API_URL;
@@ -24,7 +21,7 @@ export const WorkspacesContextProvider = ({ children }) => {
       }
     };
 
-    fetchWorkspaces();
+    //fetchWorkspaces();
   }, []);
 
   const createWorkspace = async (workspaceName, channelName) => {
