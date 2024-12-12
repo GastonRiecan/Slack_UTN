@@ -1,7 +1,10 @@
 import { Link, useNavigate } from "react-router-dom";
 import "./styles.css";
 import useCustomForm from "../../../Hooks/useCustomForm.jsx";
-import { getUnnauthenticatedHeaders, POST,  } from "../../../fetching/http.fetching.js";
+import {
+  getUnnauthenticatedHeaders,
+  POST,
+} from "../../../fetching/http.fetching.js";
 
 const RegisterForm = () => {
   const form_fields = {
@@ -10,35 +13,34 @@ const RegisterForm = () => {
     password: "",
   };
 
-  const { form_values_state, handleChangeInputValue } = useCustomForm(form_fields);
-  const navigate = useNavigate()
+  const { form_values_state, handleChangeInputValue } =
+    useCustomForm(form_fields);
+  const navigate = useNavigate();
   const backendUrl = import.meta.env.VITE_API_URL;
 
-  console.log("BACKEND URL",backendUrl);
-  
-  
+  console.log("BACKEND URL", backendUrl);
+
   const handleSubmitRegisterForm = async (e) => {
     e.preventDefault();
     try {
-            const body = await POST(
-                `${backendUrl}/api/auth/register`,
-                {
-                    headers: getUnnauthenticatedHeaders(),
-                    body: JSON.stringify(form_values_state)
-                }
-            )
+      const body = await POST(`${backendUrl}/api/auth/register`, {
+        headers: getUnnauthenticatedHeaders(),
+        body: JSON.stringify(form_values_state),
+      });
 
-            if (body.ok) {
-              console.log("Registro Exitoso")
-            } else {
-                console.error("Error en el registro:", body.message)
-            }
-            console.log(body)
-        } catch (error) {
-            console.error(error);
-        }
+      if (body.ok) {
+        sessionStorage.setItem("access_token", body.payload.accessToken);
 
-   /*  try {
+        console.log("Registro Exitoso, anda a revisar tu casilla de mail!!");
+        navigate("/login");
+      } else {
+        console.error("Error en el registro:", body.message);
+      }
+      console.log(body);
+    } catch (error) {
+      console.error(error);
+    }
+    /*  try {
     e.preventDefault();
 
     const body = await POST(`${backendUrl}/api/auth/register`,
@@ -48,23 +50,8 @@ const RegisterForm = () => {
         body: JSON.stringify(form_values_state)
       }
     ) */
-    
+  };
 
-    if (body.ok) {
-            
-      sessionStorage.setItem('access_token', body.payload.accessToken);
-      
-      alert("Registro Exitoso, anda a revisar tu casilla de mail!!");
-      navigate('/login');
-    } else {
-      console.error("Error en el registro:", body.message);
-    }
-  } catch (error) {
-    console.error(error);
-  }
-};
-
-      
   return (
     <div className="register-form">
       <h1>Registrate en nuestra web</h1>
