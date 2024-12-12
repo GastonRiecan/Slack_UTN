@@ -25,6 +25,8 @@ const RegisterForm = () => {
     try {
       const body = await POST(`${backendUrl}/api/auth/register`, {
         headers: getUnnauthenticatedHeaders(),
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE",
         body: JSON.stringify(form_values_state),
       });
 
