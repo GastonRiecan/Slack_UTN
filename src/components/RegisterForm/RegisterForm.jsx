@@ -18,7 +18,27 @@ const RegisterForm = () => {
   
   
   const handleSubmitRegisterForm = async (e) => {
+    e.preventDefault();
     try {
+            const body = await POST(
+                `${backendUrl}/api/auth/register`,
+                {
+                    headers: getUnnauthenticatedHeaders(),
+                    body: JSON.stringify(form_values_state)
+                }
+            )
+
+            if (body.ok) {
+              console.log("Registro Exitoso")
+            } else {
+                console.error("Error en el registro:", body.message)
+            }
+            console.log(body)
+        } catch (error) {
+            console.error(error);
+        }
+
+   /*  try {
     e.preventDefault();
 
     const body = await POST(`${backendUrl}/api/auth/register`,
@@ -27,7 +47,7 @@ const RegisterForm = () => {
         mode: "no-cors",
         body: JSON.stringify(form_values_state)
       }
-    )
+    ) */
     
 
     if (body.ok) {
