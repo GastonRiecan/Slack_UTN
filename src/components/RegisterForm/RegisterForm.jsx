@@ -26,13 +26,12 @@ const RegisterForm = () => {
       const body = await POST(`${backendUrl}/api/auth/register`, {
         headers: getUnnauthenticatedHeaders(),
         "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE",
-        body: JSON.stringify(form_values_state),
+      /*  mode: "no-cors",
+        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE", */
+        body: JSON.stringify(form_values_state)
       });
 
       if (body.ok) {
-        sessionStorage.setItem("access_token", body.payload.accessToken);
-
         console.log("Registro Exitoso, anda a revisar tu casilla de mail!!");
         navigate("/login");
       } else {
@@ -42,16 +41,6 @@ const RegisterForm = () => {
     } catch (error) {
       console.error(error);
     }
-    /*  try {
-    e.preventDefault();
-
-    const body = await POST(`${backendUrl}/api/auth/register`,
-      {
-        headers: getUnnauthenticatedHeaders(),
-        mode: "no-cors",
-        body: JSON.stringify(form_values_state)
-      }
-    ) */
   };
 
   return (
