@@ -24,6 +24,7 @@ const RegisterForm = () => {
     const body = await POST(`${backendUrl}/api/auth/register`,
       {
         headers: getUnnauthenticatedHeaders(),
+        mode: "no-cors",
         body: JSON.stringify(form_values_state)
       }
     )
