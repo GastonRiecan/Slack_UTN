@@ -1,6 +1,7 @@
 import SearchGIF from "../SearchGIF/SearchGIF";
 import "./styles.css";
 import { useState } from "react";
+import PropTypes from "prop-types";
 
 const MessageCreationForm = ({ handleCreateMessage }) => {
   const [newMessage, setNewMessage] = useState("");
@@ -9,8 +10,13 @@ const MessageCreationForm = ({ handleCreateMessage }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await handleCreateMessage(newMessage); 
-      setNewMessage(""); 
+      if (newMessage.trim()) {
+        // Solo enviar el mensaje si hay contenido
+        await handleCreateMessage(newMessage);
+        setNewMessage("");  // Limpiar el campo después de enviar el mensaje
+      } else {
+        console.log("Mensaje vacío, no enviado");
+      }
     } catch (error) {
       console.error("Error al crear el mensaje", error);
     }
@@ -53,6 +59,10 @@ const MessageCreationForm = ({ handleCreateMessage }) => {
       )}
     </form>
   );
+};
+
+MessageCreationForm.propTypes = {
+  handleCreateMessage: PropTypes.func.isRequired,
 };
 
 export default MessageCreationForm;

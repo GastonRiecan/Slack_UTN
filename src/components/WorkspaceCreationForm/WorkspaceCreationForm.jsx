@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useWorkspacesContext } from "../../contexts/WorkspacesContext";
+import { useState } from "react";
+import { useWorkspacesContext } from "../../../Hooks/useWorkspaceContext.js";
 import { useNavigate } from "react-router-dom";
 import "./styles.css";
 

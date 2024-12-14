@@ -4,20 +4,21 @@ import ChannelHeader from "../../components/ChannelHeader/ChannelHeader.jsx";
 import ChannelList from "../../components/ChannelList/ChannelList.jsx";
 import Message from "../../components/Message/Message.jsx";
 import "./styles.css";
-import { useWorkspacesContext } from "../../contexts/WorkspacesContext";
+import { useWorkspacesContext } from "../../../Hooks/useWorkspaceContext.js"
 import MessageCreationForm from "../../components/MessageCreationForm/MessageCreationForm.jsx";
 import { useState, useEffect } from "react";
-import { PUT, DELETE, getAuthenticatedHeaders } from "../../../fetching/http.fetching.js";
+import { PUT, DELETE, getAuthenticatedHeaders, GET } from "../../../fetching/http.fetching.js";
+
 
 
 const WorkspacePage = () => {
-
   const backendUrl = import.meta.env.VITE_API_URL;
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const isMobile = useIsMobile();
-  const { workSpaces, createMessage } = useWorkspacesContext(); 
+  const { workSpaces, createMessage, updateMessages } = useWorkspacesContext(); 
   const { id_workspace, id_channel } = useParams(); 
   const [currentChannel, setCurrentChannel] = useState(null);
+  const [messages, setMessages] = useState([]);
 
   useEffect(() => {
     const currentWorkSpace = workSpaces.find(
@@ -29,6 +30,7 @@ const WorkspacePage = () => {
         (channel) => channel.id === id_channel
       );
       setCurrentChannel(channel);
+      setMessages(channel.messages);
     }
   }, [workSpaces, id_workspace, id_channel]);
 
@@ -38,16 +40,32 @@ const WorkspacePage = () => {
 
   const handleCreateMessage = async (newMessageContent) => {
     try {
-      const newMessage = createMessage(newMessageContent, id_workspace, id_channel);
-
+      const newMessage = await createMessage(newMessageContent, id_workspace, id_channel);
+  
       if (newMessage) {
-        setCurrentChannel((prevState) => ({
-          ...prevState,
-          messages: [...prevState.messages, newMessage],
-        }));
+        setMessages((prevMessages) => [...prevMessages, newMessage]);
+        // Recargar los mensajes desde el backend para obtener los datos más recientes
+        await reloadMessagesFromBackend();  // Aquí recargamos los mensajes después de enviar uno nuevo
       }
     } catch (error) {
       console.error("Error al crear el mensaje", error);
+    }
+  };
+  
+  const reloadMessagesFromBackend = async () => {
+    try {
+      const response = await GET(`${backendUrl}/api/workspaces/${id_workspace}/channels/${id_channel}/messages`, {
+        headers: getAuthenticatedHeaders(),
+      });
+  
+      if (response.ok) {
+        const updatedMessages = await response.json();
+        setMessages(updatedMessages);
+      } else {
+        console.error("Error al recuperar los mensajes");
+      }
+    } catch (error) {
+      console.error("Error al comunicar con el servidor", error);
     }
   };
   
@@ -60,13 +78,12 @@ const WorkspacePage = () => {
       });
 
       if (response.ok) {
-        const updatedMessages = currentChannel.messages.map((msg) =>
+        const updatedMessages = messages.map((msg) => 
           msg.id === messageId ? { ...msg, content: newContent } : msg
         );
-        setCurrentChannel((prevState) => ({
-          ...prevState,
-          messages: updatedMessages,
-        }));
+        setMessages(updatedMessages);
+
+        updateMessages(id_workspace, id_channel, { id: messageId, content: newContent });
       } else {
         console.error("Error al actualizar el mensaje");
       }
@@ -77,16 +94,15 @@ const WorkspacePage = () => {
 
   const handleDeleteMessage = async (messageId) => {
     try {
-      const response = await DELETE(`${backendUrl}/api/messages//${id_workspace}/${id_channel}/${messageId}`, {
+      const response = await DELETE(`${backendUrl}/api/messages/${id_workspace}/${id_channel}/${messageId}`, {
         headers: getAuthenticatedHeaders()
       });
 
       if (response.ok) {
-        const updatedMessages = currentChannel.messages.filter((msg) => msg.id !== messageId);
-        setCurrentChannel((prevState) => ({
-          ...prevState,
-          messages: updatedMessages,
-        }));
+        const updatedMessages = messages.filter((msg) => msg.id !== messageId);
+        setMessages(updatedMessages);
+
+        updateMessages(id_workspace, id_channel, null, messageId);
       } else {
         console.error("Error al eliminar el mensaje");
       }
@@ -121,21 +137,20 @@ const WorkspacePage = () => {
         <div className="message-content">
           <h3>#{currentChannel.name}</h3>
           <div className="scrollable">
-            {currentChannel.messages.length === 0 ? (
+            {messages.length === 0 ? (
               <p>No hay mensajes</p>
             ) : (
-              currentChannel.messages.map((message) => (
+              messages.map((message) => (
                 <Message
-
                   key={message.id}
                   message={message}
-                  onEdit={handleEditMessage} 
-                  onDelete={handleDeleteMessage} 
+                  onEdit={handleEditMessage}
+                  onDelete={handleDeleteMessage}
                 />
               ))
             )}
           </div>
-          <MessageCreationForm  handleCreateMessage={handleCreateMessage}/>
+          <MessageCreationForm handleCreateMessage={handleCreateMessage} />
         </div>
       </div>
     </>

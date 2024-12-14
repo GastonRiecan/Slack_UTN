@@ -1,4 +1,4 @@
-import { useWorkspacesContext } from "../../contexts/WorkspacesContext";
+import { useWorkspacesContext } from "../../../Hooks/useWorkspaceContext.js";
 import { Link } from "react-router-dom";
 import "./styles.css";
 

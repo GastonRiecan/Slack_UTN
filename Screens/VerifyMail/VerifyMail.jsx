@@ -18,7 +18,7 @@ export const VerifyMail = () => {
           }
         );
 
-        if (response && response.ok) {
+        if (response) {
           setResponseStatus("Verificado!!! Anda a loguearte!!😊🙌👌👍❤️");
         } else {
           setResponseStatus("Error al verificar tu correo.");
