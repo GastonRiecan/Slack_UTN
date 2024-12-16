@@ -45,7 +45,7 @@ const Message = ({ message, onEdit, onDelete }) => {
         <div className="edit-message">
           <textarea
             value={editedMessage}
-            onChange={(e) => setEditedMessage(e.target.value)} // Actualiza el contenido editado
+            onChange={(e) => setEditedMessage(e.target.value)}
           />
           <button onClick={handleSaveEdit}>Guardar</button>
           <button onClick={handleCancelEdit}>Cancelar</button>

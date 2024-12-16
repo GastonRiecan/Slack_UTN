@@ -1,14 +1,13 @@
 import { createContext, useEffect, useState } from "react";
-import { getData } from "../helpers/localStorage";
-import { getAuthenticatedHeaders, POST } from "../../fetching/http.fetching";
+import { DELETE, getAuthenticatedHeaders, POST, PUT } from "../../fetching/http.fetching";
 import PropTypes from "prop-types";
+import { getData } from "../helpers/localStorage";
 
 export const WorkspacesContext = createContext();
 
 export const WorkspacesContextProvider = ({ children }) => {
   const [workSpacesData, setWorkSpacesData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-
   const backendUrl = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
@@ -22,40 +21,10 @@ export const WorkspacesContextProvider = ({ children }) => {
         setIsLoading(false);
       }
     };
-
+    
     fetchWorkspaces();
-  }, []);
-
-  const updateMessages = (workspaceId, channelId, newMessage = null, deleteMessageId = null) => {
-    setWorkSpacesData((prevWorkSpaces) =>
-      prevWorkSpaces.map((workspace) => {
-        if (workspace._id === workspaceId) {
-          return {
-            ...workspace,
-            channels: workspace.channels.map((channel) => {
-              if (channel.id === channelId) {
-                if (newMessage) {
-                  return {
-                    ...channel,
-                    messages: [...channel.messages, newMessage],
-                  };
-                }
-                if (deleteMessageId) {
-                  return {
-                    ...channel,
-                    messages: channel.messages.filter((msg) => msg.id !== deleteMessageId),
-                  };
-                }
-              }
-              return channel;
-            }),
-          };
-        }
-        return workspace;
-      })
-    );
-  };
-
+  }, [setWorkSpacesData]);
+ 
   const createWorkspace = async (workspaceName, channelName) => {
     const newWorkspace = {
       name: workspaceName,
@@ -129,7 +98,7 @@ export const WorkspacesContextProvider = ({ children }) => {
   
 
   const createMessage = async (message, workspaceId, channelId) => {
-    const newMessage = {
+    let newMessage = {
       userID: "1",
       timeStamp: new Date().toISOString(),
       content: message,
@@ -145,11 +114,13 @@ export const WorkspacesContextProvider = ({ children }) => {
           body: JSON.stringify(newMessage),
         }
       );
-      const updatedMessage = await response.json();
 
-      console.log("Mensaje creado:", newMessage);
-      
+    if (!response.ok) {
+      throw new Error(`Failed to create message. Status: ${response.status}`);
+    }
 
+    newMessage = response.payload.newMessage;  
+    newMessage.id = response.payload.newMessage.id; 
       setWorkSpacesData((prevWorkSpaces) =>
         prevWorkSpaces.map((workspace) => {
           if (workspace._id === workspaceId) {
@@ -159,7 +130,7 @@ export const WorkspacesContextProvider = ({ children }) => {
                 if (channel.id === channelId) {
                   return {
                     ...channel,
-                    messages: [...channel.messages, updatedMessage],
+                    messages: [...channel.messages, newMessage],
                   };
                 }
                 return channel;
@@ -170,12 +141,109 @@ export const WorkspacesContextProvider = ({ children }) => {
         })
       );
 
-      return updatedMessage;
+      return newMessage;
     } catch (error) {
       console.error("Error al crear el mensaje:", error);
       return null;
     }
   };
+
+  const updateMessage = async (messageId, newContent, workspaceId, channelId) => {
+    const updatedMessage = {
+      userID: "1",
+      content: newContent,
+      workspaceId,
+      channelId,
+      timeStamp: new Date().toISOString(),
+    };
+    
+    try {
+      const response = await PUT(
+        `${backendUrl}/api/messages/${workspaceId}/${channelId}/${messageId}`,
+        {
+          headers: getAuthenticatedHeaders(),
+          body: JSON.stringify(updatedMessage),
+        }
+      );
+  
+      if (!response.ok) {
+        throw new Error(`Failed to update message. Status: ${response.status}`);
+      }
+      
+      const updatedMessagecontent = response.payload.updatedMessage; 
+  
+      setWorkSpacesData((prevWorkSpaces) =>
+        prevWorkSpaces.map((workspace) => {
+          if (workspace._id === workspaceId) {
+            return {
+              ...workspace,
+              channels: workspace.channels.map((channel) => {
+                if (channel.id === channelId) {
+                  return {
+                    ...channel,
+                    messages: channel.messages.map((msg) =>
+                      msg.id === messageId ? { ...msg, content: updatedMessagecontent } : msg
+                    ),
+                  };
+                }
+                return channel;
+              }),
+            };
+          }
+          return workspace;
+        })
+      );
+  
+      return updatedMessagecontent;
+    } catch (error) {
+      console.error("Error al actualizar el mensaje:", error);
+      return null;
+    }
+  };
+  
+
+  const deleteMessage = async (messageId, workspaceId, channelId) => {
+    console.log("ID del mensaje que se va a eliminar:", messageId);
+  
+    try {
+      const response = await DELETE(
+        `${backendUrl}/api/messages/${workspaceId}/${channelId}/${messageId}`,
+        { headers: getAuthenticatedHeaders() }
+      );
+  
+      if (!response.ok) {
+        throw new Error(`Fallo al eliminar el mensaje. Status: ${response.status}`);
+      }
+  
+      console.log("Mensaje eliminado correctamente:", messageId);
+  
+      setWorkSpacesData((prevWorkSpaces) =>
+        prevWorkSpaces.map((workspace) => {
+          if (workspace._id === workspaceId) {
+            return {
+              ...workspace,
+              channels: workspace.channels.map((channel) => {
+                if (channel.id === channelId) {
+                  return {
+                    ...channel,
+                    messages: channel.messages.filter((msg) => msg.id !== messageId),
+                  };
+                }
+                return channel;
+              }),
+            };
+          }
+          return workspace;
+        })
+      );
+  
+      return messageId;
+    } catch (error) {
+      console.error("Error al eliminar el mensaje:", error);
+      return null;
+    }
+  };
+  
 
   return (
     <WorkspacesContext.Provider
@@ -184,8 +252,10 @@ export const WorkspacesContextProvider = ({ children }) => {
         createWorkspace,
         createChannel,
         createMessage,
-        updateMessages,
-        isLoading,
+        updateMessage,
+        deleteMessage,
+        setWorkSpacesData,
+        isLoading
       }}
     >
       {children}

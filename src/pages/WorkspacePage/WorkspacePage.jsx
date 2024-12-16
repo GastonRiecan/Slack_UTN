@@ -7,15 +7,11 @@ import "./styles.css";
 import { useWorkspacesContext } from "../../../Hooks/useWorkspaceContext.js"
 import MessageCreationForm from "../../components/MessageCreationForm/MessageCreationForm.jsx";
 import { useState, useEffect } from "react";
-import { PUT, DELETE, getAuthenticatedHeaders, GET } from "../../../fetching/http.fetching.js";
-
-
 
 const WorkspacePage = () => {
-  const backendUrl = import.meta.env.VITE_API_URL;
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const isMobile = useIsMobile();
-  const { workSpaces, createMessage, updateMessages } = useWorkspacesContext(); 
+  const { workSpaces, createMessage, updateMessage, deleteMessage } = useWorkspacesContext(); 
   const { id_workspace, id_channel } = useParams(); 
   const [currentChannel, setCurrentChannel] = useState(null);
   const [messages, setMessages] = useState([]);
@@ -32,7 +28,7 @@ const WorkspacePage = () => {
       setCurrentChannel(channel);
       setMessages(channel.messages);
     }
-  }, [workSpaces, id_workspace, id_channel]);
+  }, [workSpaces, id_workspace, id_channel, setMessages]);
 
   const currentWorkSpace = workSpaces.find(
     (workSpace) => workSpace._id == id_workspace
@@ -44,70 +40,39 @@ const WorkspacePage = () => {
   
       if (newMessage) {
         setMessages((prevMessages) => [...prevMessages, newMessage]);
-        // Recargar los mensajes desde el backend para obtener los datos más recientes
-        await reloadMessagesFromBackend();  // Aquí recargamos los mensajes después de enviar uno nuevo
       }
     } catch (error) {
       console.error("Error al crear el mensaje", error);
     }
   };
-  
-  const reloadMessagesFromBackend = async () => {
-    try {
-      const response = await GET(`${backendUrl}/api/workspaces/${id_workspace}/channels/${id_channel}/messages`, {
-        headers: getAuthenticatedHeaders(),
-      });
-  
-      if (response.ok) {
-        const updatedMessages = await response.json();
-        setMessages(updatedMessages);
-      } else {
-        console.error("Error al recuperar los mensajes");
-      }
-    } catch (error) {
-      console.error("Error al comunicar con el servidor", error);
-    }
-  };
-  
+
   const handleEditMessage = async (messageId, newContent) => {
     try {
-      const response = await PUT(`${backendUrl}/api/messages/${id_workspace}/${id_channel}/${messageId}`, {
-        headers: getAuthenticatedHeaders(),
-        body: JSON.stringify({ content: newContent }),
-        workSpace: currentWorkSpace
-      });
-
-      if (response.ok) {
-        const updatedMessages = messages.map((msg) => 
-          msg.id === messageId ? { ...msg, content: newContent } : msg
+      const updatedMessage = await updateMessage(messageId, newContent, id_workspace, id_channel);
+  
+      if (updatedMessage) {
+        setMessages((prevMessages) =>
+          prevMessages.map((msg) =>
+            msg.id === messageId ? { ...msg, content: updatedMessage.content } : msg
+          )
         );
-        setMessages(updatedMessages);
-
-        updateMessages(id_workspace, id_channel, { id: messageId, content: newContent });
-      } else {
-        console.error("Error al actualizar el mensaje");
       }
     } catch (error) {
-      console.error("Error al comunicar con el servidor", error);
+      console.error("Error al actualizar el mensaje", error);
     }
   };
-
+  
   const handleDeleteMessage = async (messageId) => {
     try {
-      const response = await DELETE(`${backendUrl}/api/messages/${id_workspace}/${id_channel}/${messageId}`, {
-        headers: getAuthenticatedHeaders()
-      });
-
-      if (response.ok) {
-        const updatedMessages = messages.filter((msg) => msg.id !== messageId);
-        setMessages(updatedMessages);
-
-        updateMessages(id_workspace, id_channel, null, messageId);
-      } else {
-        console.error("Error al eliminar el mensaje");
+      const deletedMessageId = await deleteMessage(messageId, id_workspace, id_channel);
+  
+      if (deletedMessageId) {
+        setMessages((prevMessages) =>
+          prevMessages.filter((msg) => msg.id !== deletedMessageId)
+        );
       }
     } catch (error) {
-      console.error("Error al comunicar con el servidor", error);
+      console.error("Error al eliminar el mensaje", error);
     }
   };
 
@@ -142,7 +107,7 @@ const WorkspacePage = () => {
             ) : (
               messages.map((message) => (
                 <Message
-                  key={message.id}
+                  key={message._id}
                   message={message}
                   onEdit={handleEditMessage}
                   onDelete={handleDeleteMessage}

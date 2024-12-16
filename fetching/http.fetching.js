@@ -25,8 +25,6 @@ export const GET = async (URL_API, params) => {
                 ...params
             }
         )
-        console.log(response);
-
         return response.json()
     }
     catch (error) {

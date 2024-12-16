@@ -21,17 +21,12 @@ export const ChannelList = ({ workSpace, toggleMenuOpen, isMenuOpen }) => {
   };
 
   const handleCreateChannel = async (channelName) => {
-    // Crear un nuevo canal usando la función del contexto
     const newChannel = await createChannel(workSpace._id, channelName);
 
-    // Después de crear el canal, asegúrate de que el componente se actualice con los nuevos canales
     if (newChannel) {
-      // Aquí aseguramos que el canal se haya creado correctamente y sincronizamos el estado
-      // Recargamos los canales para asegurarnos de que la UI se actualice sin necesidad de recargar la página
-      const updatedChannels = [...workSpace.channels, newChannel];  // Agregar el nuevo canal al estado local
-      workSpace.channels = updatedChannels;  // Actualiza el estado de los canales en el espacio de trabajo (si lo haces en un contexto)
+      const updatedChannels = [...workSpace.channels, newChannel];  
+      workSpace.channels = updatedChannels; 
       
-      // Navegar al canal recién creado
       navigate(`/workspace/${workSpace._id}/${newChannel.id}`);
     }
   };

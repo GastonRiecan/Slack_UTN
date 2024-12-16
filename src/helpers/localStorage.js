@@ -8,9 +8,6 @@ export const getData = async () => {
 		const response = await GET(`${backendUrl}/api/workspaces/get`, {
 			headers: getAuthenticatedHeaders(),
 		});
-
-		console.log("Response recibido:", response);
-
 		if (!response.ok) {
 			throw new Error("Error al obtener los datos de los workspaces");
 		}

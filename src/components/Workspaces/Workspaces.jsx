@@ -5,6 +5,9 @@ import "./styles.css";
 const Workspaces = ({user_id}) => {
   const { workSpaces, isLoading } = useWorkspacesContext();
 
+  console.log("Workspaces en componente Workspaces:", workSpaces);
+  
+
   if (isLoading) {
     return <p>Cargando...</p>;
   }
