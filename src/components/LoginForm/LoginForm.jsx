@@ -4,6 +4,7 @@ import extractFormData from "../../../utils/extractFormData.js";
 import "./styles.css";
 import {
   POST,
+  getAuthenticatedHeaders,
   getUnnauthenticatedHeaders,
 } from "../../../fetching/http.fetching.js";
 
@@ -28,7 +29,7 @@ const LoginForm = () => {
       const form_values_object = extractFormData(form_fields, form_Values);
 
       const response = await POST(`${backendUrl}/api/auth/login`, {
-        headers: getUnnauthenticatedHeaders(),
+        headers: getAuthenticatedHeaders(),
         body: JSON.stringify(form_values_object),
       });
 console.log('respuesta del back al loguearse',response);

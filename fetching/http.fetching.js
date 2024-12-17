@@ -80,20 +80,16 @@ const getUnnauthenticatedHeaders = () => {
 }
 
 const getAuthenticatedHeaders = () => {
-    const token = localStorage.getItem('vercel-toolbar-session-https://slack-utn.vercel.app');
-    console.log("token sacado del local storage ----> ", token);
-
+    const token = sessionStorage.getItem('access_token');
     if (!token) {
-        throw new Error('No token found in localStorage');
+        throw new Error('No token found in sessionStorage');
     }
 
     const authenticatedHeaders = new Headers()
     authenticatedHeaders.set('Content-Type', 'application/json')
     authenticatedHeaders.set('x-api-key', '8e849ec1-2977-404c-88c0-c8d2246d498f')
-    authenticatedHeaders.set('Authorization', `Bearer ${localStorage.getItem('vercel-toolbar-session-https://slack-utn.vercel.app')}`)
-    authenticatedHeaders.set("Access-Control-Allow-Origin", "https://slack-utn.vercel.app")
-    authenticatedHeaders.set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE")
-    authenticatedHeaders.set("Access-Control-Allow-Headers", "https://slack-utn.vercel.app")
+    authenticatedHeaders.set('Authorization', 'Bearer ' + sessionStorage.getItem('access_token'))
+    authenticatedHeaders.set("Access-Control-Allow-Origin", "*", "Access-Control-Allow-Methods", "GET,PUT,POST,DELETE")
     return authenticatedHeaders
 }
 
