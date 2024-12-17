@@ -31,9 +31,10 @@ const LoginForm = () => {
         headers: getUnnauthenticatedHeaders(),
         body: JSON.stringify(form_values_object),
       });
+console.log('respuesta del back al loguearse',response);
 
 
-      if (response.ok) {
+      if (response) {
           sessionStorage.setItem("access_token", response.payload.token);
           sessionStorage.setItem("user_info", JSON.stringify(response.payload.user));
       
