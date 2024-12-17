@@ -81,6 +81,8 @@ const getUnnauthenticatedHeaders = () => {
 
 const getAuthenticatedHeaders = () => {
     const token = localStorage.getItem('vercel-toolbar-session-https://slack-utn.vercel.app');
+    console.log("token sacado del local storage ----> ", token);
+
     if (!token) {
         throw new Error('No token found in localStorage');
     }
