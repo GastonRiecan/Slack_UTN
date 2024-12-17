@@ -25,6 +25,7 @@ export const GET = async (URL_API, params) => {
                 ...params
             }
         )
+
         return response.json()
     }
     catch (error) {
@@ -79,7 +80,7 @@ const getUnnauthenticatedHeaders = () => {
 }
 
 const getAuthenticatedHeaders = () => {
-    const token = localStorage.getItem('token');
+    const token = sessionStorage.getItem('access_token');
     if (!token) {
         throw new Error('No token found in sessionStorage');
     }
@@ -87,7 +88,7 @@ const getAuthenticatedHeaders = () => {
     const authenticatedHeaders = new Headers()
     authenticatedHeaders.set('Content-Type', 'application/json')
     authenticatedHeaders.set('x-api-key', '8e849ec1-2977-404c-88c0-c8d2246d498f')
-    authenticatedHeaders.set('Authorization', 'Bearer ' + localStorage.getItem('token'))
+    authenticatedHeaders.set('Authorization', 'Bearer ' + sessionStorage.getItem('access_token'))
     authenticatedHeaders.set("Access-Control-Allow-Origin", "*", "Access-Control-Allow-Methods", "GET,PUT,POST,DELETE")
     return authenticatedHeaders
 }
