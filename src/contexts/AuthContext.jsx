@@ -14,7 +14,7 @@ export const AuthContextProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const access_token = sessionStorage.getItem("access_token");
+    const access_token = localStorage.getItem("token");
     if (access_token) {
       setIsAuthenticatedUser(true);
       const fetchWorkspaces = async () => {
