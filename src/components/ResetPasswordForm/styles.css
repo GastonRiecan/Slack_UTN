@@ -1,132 +1,155 @@
-.reset-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 50vh;
-    border: 1px solid black;
-    border-radius: 8px;
-    height: 300px;
-    width: 450px;
-    padding-left: 30px;
-    margin-left: 450px;
-    margin-top: 100px;
-    background-color: darkgray;
-    box-shadow: azure 0px 0px 20px;
-    font-family: roboto, sans-serif;
-    gap: 10px;
+/* Contenedor general */
+.reset-password-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: 'Roboto', sans-serif;
+  background-color: #f5f5dc;
 }
 
-  .modal-content {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 400px;
+/* Estilos específicos para el modal de error */
+.reset-password-error-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+}
+
+.reset-password-modal-content {
+  background-color: #f8d7da; /* Rojo claro */
+  color: #721c24;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+}
+
+.reset-password-error-modal button {
+  margin-top: 10px;
+  background-color: #721c24;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Estilos específicos para el modal de éxito */
+.reset-password-success-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+}
+
+.reset-password-success-modal .reset-password-modal-content {
+  background-color: #d4edda; /* Verde claro */
+  color: #155724;
+}
+
+.reset-password-success-modal button {
+  margin-top: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Estilos para el formulario */
+.reset-password-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: darkgray;
+  border-radius: 8px;
+  padding: 20px;
+  width: 90%;
+  max-width: 450px;
+  box-shadow: 0px 0px 20px azure;
+  gap: 10px;
+}
+
+.reset-password-form h1 {
+  font-size: 1.8rem;
+}
+
+.reset-password-form p {
+  font-size: 1rem;
+}
+
+.reset-password-form input {
+  padding: 10px;
+  margin: 10px 0;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.reset-password-form button {
+  padding: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.reset-password-form button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.reset-password-form span {
+  font-size: 0.9rem;
+}
+
+/* Media Queries para pantallas más pequeñas */
+@media (max-width: 768px) {
+  .reset-password-form {
+    width: 80%;
+  }
+
+  .reset-password-modal-content {
+    width: 85%;
+  }
+
+  .reset-password-form h1 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .reset-password-form {
     width: 90%;
-    text-align: center;
   }
-  
-  .error-modal .modal-content {
-    background-color: #f8d7da; 
-    color: #721c24;
+
+  .reset-password-modal-content {
+    width: 95%;
   }
-  
-  .success-modal .modal-content {
-    background-color: #d4edda; 
-    color: #155724;
+
+  .reset-password-form h1 {
+    font-size: 1.3rem;
   }
-  
-  button {
-    padding: 10px 20px;
-    margin-top: 10px;
-    background-color: #4CAF50; 
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+
+  .reset-password-form p {
+    font-size: 0.9rem;
   }
-  
-  button:hover {
-    background-color: #45a049;
-  }
-  
-  .reset-form {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 400px;
-    width: 90%;
-  }
-  
-  .reset-form h1 {
-    font-size: 1.8rem;
-    margin-bottom: 10px;
-  }
-  
-  .reset-form p {
-    font-size: 1rem;
-    margin-bottom: 15px;
-  }
-  
-  .reset-form input {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  .reset-form button {
-    width: 100%;
-  }
-  
-  @media (max-width: 768px) {
-    .reset-password-container {
-      padding: 10px;
-    }
-  
-    .reset-form {
-      width: 100%;
-    }
-  
-    .modal-content {
-      width: 90%;
-    }
-  
-    .reset-form h1 {
-      font-size: 1.5rem;
-    }
-  
-    .reset-form p {
-      font-size: 0.9rem;
-    }
-  
-    button {
-      padding: 8px 16px;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .reset-form {
-      padding: 15px;
-    }
-  
-    .reset-form h1 {
-      font-size: 1.3rem;
-    }
-  
-    .reset-form p {
-      font-size: 0.8rem;
-    }
-  
-    .modal-content {
-      width: 100%;
-    }
-  
-    button {
-      width: 100%;
-    }
-  }
-  
+}

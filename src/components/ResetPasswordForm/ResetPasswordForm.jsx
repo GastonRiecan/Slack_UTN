@@ -47,9 +47,10 @@ const ResetPasswordForm = () => {
 
   return (
     <div className="reset-password-container">
+      {/* Modal de error */}
       {error && (
-        <div className="modal error-modal">
-          <div className="modal-content">
+        <div className="reset-password-error-modal">
+          <div className="reset-password-modal-content">
             <h2>Error</h2>
             <p>{error}</p>
             <button onClick={() => setError(null)}>Cerrar</button>
@@ -57,9 +58,10 @@ const ResetPasswordForm = () => {
         </div>
       )}
 
+      {/* Modal de éxito */}
       {success && (
-        <div className="modal success-modal">
-          <div className="modal-content">
+        <div className="reset-password-success-modal">
+          <div className="reset-password-modal-content">
             <h2>Éxito</h2>
             <p>{success}</p>
             <Link to="/login">
@@ -70,7 +72,8 @@ const ResetPasswordForm = () => {
         </div>
       )}
 
-      <form className="reset-form" onSubmit={handleSubmitResetForm}>
+      {/* Formulario para restablecer la contraseña */}
+      <form className="reset-password-form" onSubmit={handleSubmitResetForm}>
         <h1>Restablecer contraseña</h1>
         <p>Completa el formulario con la nueva contraseña para restablecer:</p>
         <div>
