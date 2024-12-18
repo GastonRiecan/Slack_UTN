@@ -42,7 +42,7 @@ export const AuthContextProvider = ({ children }) => {
       value={{
         logout,
         isAuthenticatedUser,
-        //isLoading,
+        setIsAuthenticatedUser,
       }}
     >
       {children}

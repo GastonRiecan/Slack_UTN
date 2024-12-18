@@ -6,12 +6,14 @@ import {
   POST,
   getAuthenticatedHeaders,
 } from "../../../fetching/http.fetching.js";
+import { useAuthContext } from "../../contexts/AuthContext.jsx";
 
 const LoginForm = () => {
   const [error, setError] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
   const backendUrl = import.meta.env.VITE_API_URL;
+  const {setIsAuthenticated} = useAuthContext();
   
   const handleSubmitLoginForm = async (e) => {
     try {
@@ -39,6 +41,8 @@ const LoginForm = () => {
       if (response) {
           sessionStorage.setItem("access_token", response.payload.token);
           sessionStorage.setItem("user_info", JSON.stringify(response.payload.user));
+
+          setIsAuthenticated(true);
       
           navigate(`/home/${response.payload.user.id}`);
           
