@@ -33,8 +33,15 @@ export const VerifyMail = () => {
   }, [verificationToken]);
 
   return (
-    <div>
-      {responseStatus ? <h2>{responseStatus}</h2> : <h2>Verificando...</h2>}
+    <div className="verify-mail">
+      <div className="container">
+        {responseStatus ? (
+          <h2>{responseStatus}</h2>
+        ) : (
+          <h2>Verificando...</h2>
+        )}
+      </div>
     </div>
   );
+  
 };
