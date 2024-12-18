@@ -1,6 +1,6 @@
 import { useState, useEffect, createContext, useContext } from "react";
 import { useWorkspacesContext } from "../../Hooks/useWorkspaceContext.js"
-import { getData } from "../helpers/localStorage";
+//import { getData } from "../helpers/localStorage";
 import PropTypes from "prop-types";
 
 export const AuthContext = createContext();
@@ -42,7 +42,7 @@ export const AuthContextProvider = ({ children }) => {
       value={{
         logout,
         isAuthenticatedUser,
-        isLoading,
+        //isLoading,
       }}
     >
       {children}
