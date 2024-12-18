@@ -13,7 +13,7 @@ const LoginForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
   const backendUrl = import.meta.env.VITE_API_URL;
-  const {setIsAuthenticated} = useAuthContext();
+  const {setIsAuthenticatedUser} = useAuthContext();
   
   const handleSubmitLoginForm = async (e) => {
     try {
@@ -41,7 +41,7 @@ const LoginForm = () => {
           sessionStorage.setItem("access_token", response.payload.token);
           sessionStorage.setItem("user_info", JSON.stringify(response.payload.user));
 
-          setIsAuthenticated(true);
+          setIsAuthenticatedUser(true);
       
           navigate(`/home/${response.payload.user.id}`);
           
