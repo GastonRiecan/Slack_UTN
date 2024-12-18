@@ -16,9 +16,7 @@ const LoginForm = () => {
   const {setIsAuthenticatedUser} = useAuthContext();
   
   const handleSubmitLoginForm = async (e) => {
-    try {
-      console.log('logueandose');
-      
+    try {      
       e.preventDefault();
       setIsSubmitting(true);
       setError(null);

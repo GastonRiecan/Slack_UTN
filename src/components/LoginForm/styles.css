@@ -37,3 +37,39 @@ button:hover {
     cursor: pointer;
     background-color: #4caf50;
 }
+
+@media (max-width: 1024px) and (min-width: 600px) {
+    .login-form {
+        width: 80%;
+        margin-left: 10%;
+        margin-top: 20px;
+    }
+
+    input {
+        padding: 12px;
+    }
+
+    button {
+        padding: 12px;
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 599px) {
+    .login-form {
+        width: 90%;
+        margin-left: 5%;
+        margin-top: 10px;
+        height: auto;
+    }
+
+    input {
+        padding: 12px;
+        font-size: 14px;
+    }
+
+    button {
+        padding: 12px;
+        font-size: 14px;
+    }
+}
