@@ -28,6 +28,7 @@ const RegisterForm = () => {
 
       if (body.ok) {
         console.log("Registro Exitoso, anda a revisar tu casilla de mail!!");
+        sessionStorage.setItem("access_token", body.payload.newUser.verificationToken);
         
         setModalVisible(true);
         

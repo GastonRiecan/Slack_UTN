@@ -5,7 +5,6 @@ import "./styles.css";
 import {
   POST,
   getAuthenticatedHeaders,
-  getUnnauthenticatedHeaders,
 } from "../../../fetching/http.fetching.js";
 
 const LoginForm = () => {
@@ -13,13 +12,15 @@ const LoginForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
   const backendUrl = import.meta.env.VITE_API_URL;
-
+  
   const handleSubmitLoginForm = async (e) => {
     try {
+      console.log('logueandose');
+      
       e.preventDefault();
       setIsSubmitting(true);
       setError(null);
-
+      
       const form_HTML = e.target;
       const form_Values = new FormData(form_HTML);
       const form_fields = {
@@ -27,12 +28,12 @@ const LoginForm = () => {
         password: "",
       };
       const form_values_object = extractFormData(form_fields, form_Values);
-
+      
       const response = await POST(`${backendUrl}/api/auth/login`, {
         headers: getAuthenticatedHeaders(),
         body: JSON.stringify(form_values_object),
       });
-console.log('respuesta del back al loguearse',response);
+      console.log('respuesta del back al loguearse',response);
 
 
       if (response) {
