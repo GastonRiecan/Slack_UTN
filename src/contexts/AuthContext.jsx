@@ -27,7 +27,6 @@ export const AuthContextProvider = ({ children }) => {
           setIsLoading(false);
         }
       };
-    
       fetchWorkspaces(); */
     }
   }, [access_token, setWorkSpacesData]);

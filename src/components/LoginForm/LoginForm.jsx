@@ -37,7 +37,6 @@ const LoginForm = () => {
       });
       console.log('respuesta del back al loguearse',response);
 
-
       if (response) {
           sessionStorage.setItem("access_token", response.payload.token);
           sessionStorage.setItem("user_info", JSON.stringify(response.payload.user));
