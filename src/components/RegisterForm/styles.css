@@ -79,3 +79,29 @@
 .succes-button:hover {
   background-color: #388e3c;
 }
+
+@media (max-width: 1024px) and (min-width: 600px) {
+  .register-form {
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 20px;
+  }
+
+  input, button {
+    padding: 12px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 599px) {
+  .register-form {
+    width: 90%;
+    margin-left: 5%;
+    margin-top: 10px;
+  }
+
+  input, button {
+    padding: 12px;
+    font-size: 14px;
+  }
+}
