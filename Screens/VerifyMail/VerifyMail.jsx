@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { GET, getUnnauthenticatedHeaders } from "../../fetching/http.fetching";
 import { useEffect, useState } from "react";
+import "./styles.css";
 
 export const VerifyMail = () => {
   const { verificationToken } = useParams();
