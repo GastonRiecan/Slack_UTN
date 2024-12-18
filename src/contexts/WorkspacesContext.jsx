@@ -13,8 +13,11 @@ export const WorkspacesContextProvider = ({ children }) => {
   useEffect(() => {
     const fetchWorkspaces = async () => {
       try {
-        const data = await getData();
-        setWorkSpacesData(data);
+        const access_token = sessionStorage.getItem("access_token");
+        if(access_token){
+          const data = await getData();
+          setWorkSpacesData(data);
+        }
       } catch (error) {
         console.error("Error al obtener los workspaces:", error);
       } finally {

@@ -11,13 +11,13 @@ export const AuthContextProvider = ({ children }) => {
   const [isAuthenticatedUser, setIsAuthenticatedUser] = useState(
     Boolean(access_token)
   );
-  const [isLoading, setIsLoading] = useState(true);
+  //const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const access_token = sessionStorage.getItem("access_token");
     if (access_token) {
       setIsAuthenticatedUser(true);
-      const fetchWorkspaces = async () => {
+    /*  const fetchWorkspaces = async () => {
         try {
           const data = await getData();
           setWorkSpacesData(data);          
@@ -28,7 +28,7 @@ export const AuthContextProvider = ({ children }) => {
         }
       };
     
-      fetchWorkspaces();
+      fetchWorkspaces(); */
     }
   }, [access_token, setWorkSpacesData]);
 
