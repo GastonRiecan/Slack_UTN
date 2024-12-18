@@ -30,7 +30,7 @@ const ResetPasswordForm = () => {
         console.log({ response });
 
         if (response.ok) {
-          setSuccess('Contraseña restablecida correctamente');
+          setSuccess('Contraseña restablecida correctamente. Ahora puedes iniciar sesión.');
           setError(null);  
         } else {
           setError(response.detail);
@@ -46,7 +46,7 @@ const ResetPasswordForm = () => {
   };
 
   return (
-    <div>
+    <div className="reset-password-container">
       {error && (
         <div className="modal error-modal">
           <div className="modal-content">
@@ -62,6 +62,9 @@ const ResetPasswordForm = () => {
           <div className="modal-content">
             <h2>Éxito</h2>
             <p>{success}</p>
+            <Link to="/login">
+              <button>Ir a iniciar sesión</button>
+            </Link>
             <button onClick={() => setSuccess(null)}>Cerrar</button>
           </div>
         </div>
