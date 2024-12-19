@@ -25,6 +25,8 @@ Desarrolle un chat en donde se puede registrar usuarios, loguearse y reestabelec
 
 - Uso de fetch para cargar información de los workspaces de trabajo, mensajes de los chats eh informacion del usuario traidos desde la base de datos.
 
+- Envio de mails para verificar usuario registrado y actualizar la contraseña de ingreso a la app.  
+
 - Calidad de código siguiendo los principios de la programación vistos en clase (DRY, YAGNI, KISS)
 
 ---
