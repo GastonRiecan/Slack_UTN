@@ -11,7 +11,7 @@ Desarrolle un chat en donde se puede registrar usuarios, loguearse y reestabelec
 
 - La app esta desarrollada en React.
 
-- La app cuenta con el uso de estados y useEffect.
+- La app cuenta con el uso de useState, useEffect y useParams y customHooks(useCustomForm, UseIsMobile, UseWorkspaceContext).
 
 - El enrutamiento de la página se desarrollo con react-router-dom.
 
