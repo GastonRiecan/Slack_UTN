@@ -33,7 +33,7 @@ const ResetPasswordForm = () => {
           body: JSON.stringify(form_values_object),
         }
       );
-      if (response.status == 200) {
+      if (response) {
         setSuccess(
           "¡La password se actualizo correctamente, ya te podes ir a loguear!"
         );
