@@ -10,7 +10,7 @@ const ResetPasswordForm = () => {
   const [showErrorModal, setShowErrorModal] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
 
-  const handleSubmitResetForm = (e) => {
+  const handleSubmitResetForm = async (e) => {
     e.preventDefault();
     const form_HTML = e.target;
     const form_Values = new FormData(form_HTML);
@@ -20,29 +20,30 @@ const ResetPasswordForm = () => {
 
     setIsSubmitting(true);
 
-    PUT(`${backendUrl}/api/auth/reset-password/${reset_token}`, {
-      headers: getUnnauthenticatedHeaders(),
-      body: JSON.stringify(form_values_object),
-    })
-      .then((response) => {
-        if (response.ok) {
-          setShowSuccessModal(true);
-          setShowErrorModal(false);
-        } else {
-          setShowSuccessModal(false);
-          setShowErrorModal(true);
-        }
-      })
-      .catch((error) => {
-        setShowErrorModal(true);
+    try {
+      const response = await PUT(`${backendUrl}/api/auth/reset-password/${reset_token}`, {
+        headers: getUnnauthenticatedHeaders(),
+        body: JSON.stringify(form_values_object),
+      });
+
+      if (response.ok) {
+        setShowSuccessModal(true);
+        setShowErrorModal(false);
+      } else {
         setShowSuccessModal(false);
-      })
-      .finally(() => setIsSubmitting(false));
+        setShowErrorModal(true);
+      }
+    } catch (error) {
+      console.error(error);
+      setShowErrorModal(true);
+      setShowSuccessModal(false);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
     <div className="reset-password-container">
-      {/* Modal de error */}
       {showErrorModal && (
         <div className="modal error-modal">
           <div className="modal-content">
@@ -53,7 +54,6 @@ const ResetPasswordForm = () => {
         </div>
       )}
 
-      {/* Modal de éxito */}
       {showSuccessModal && (
         <div className="modal success-modal">
           <div className="modal-content">
@@ -67,7 +67,6 @@ const ResetPasswordForm = () => {
         </div>
       )}
 
-      {/* Formulario para restablecer la contraseña */}
       <form className="reset-password-form" onSubmit={handleSubmitResetForm}>
         <h1>Restablecer contraseña</h1>
         <p>Completa el formulario con la nueva contraseña para restablecer:</p>
