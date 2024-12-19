@@ -1,4 +1,4 @@
-import extractFormData from "../../utils/extractFormData";
+import extractFormData from "../../../utils/extractFormData.js";
 import { Link, useParams } from "react-router-dom";
 import "./styles.css"
 
