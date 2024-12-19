@@ -1,108 +1,39 @@
-/* Contenedor general */
-.reset-password-container {
+
+.reset-form {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  font-family: 'Roboto', sans-serif;
-  background-color: #f5f5dc;
-}
-
-/* Estilos específicos para el modal de error */
-.reset-password-error-modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 9999;
-}
-
-.reset-password-modal-content {
-  background-color: #f8d7da; /* Rojo claro */
-  color: #721c24;
-  padding: 20px;
+  background-color: #fff;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  max-width: 400px;
-  width: 90%;
-  text-align: center;
-}
-
-.reset-password-error-modal button {
-  margin-top: 10px;
-  background-color: #721c24;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-/* Estilos específicos para el modal de éxito */
-.reset-password-success-modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 9999;
-}
-
-.reset-password-success-modal .reset-password-modal-content {
-  background-color: #d4edda; /* Verde claro */
-  color: #155724;
-}
-
-.reset-password-success-modal button {
-  margin-top: 10px;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-/* Estilos para el formulario */
-.reset-password-form {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: darkgray;
-  border-radius: 8px;
-  padding: 20px;
-  width: 90%;
-  max-width: 450px;
-  box-shadow: 0px 0px 20px azure;
-  gap: 10px;
-}
-
-.reset-password-form h1 {
-  font-size: 1.8rem;
-}
-
-.reset-password-form p {
-  font-size: 1rem;
-}
-
-.reset-password-form input {
-  padding: 10px;
-  margin: 10px 0;
+  padding: 30px;
   width: 100%;
+  max-width: 450px;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.reset-form h1 {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+}
+
+.reset-form p {
+  font-size: 1rem;
+  margin-bottom: 15px;
+}
+
+.reset-form input {
+  padding: 10px;
+  width: 100%;
+  max-width: 350px;
+  margin: 10px 0;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
 
-.reset-password-form button {
+.reset-form button {
   padding: 10px;
   background-color: #4CAF50;
   color: white;
@@ -110,46 +41,75 @@
   border-radius: 4px;
   cursor: pointer;
   width: 100%;
+  max-width: 350px;
 }
 
-.reset-password-form button:disabled {
+.reset-form button:disabled {
   background-color: #ccc;
   cursor: not-allowed;
 }
 
-.reset-password-form span {
+.reset-form span {
   font-size: 0.9rem;
+  color: #555;
+  margin-top: 10px;
+  display: block;
+  text-align: center;
 }
 
-/* Media Queries para pantallas más pequeñas */
+
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 80%;
+  text-align: center;
+}
+
+.error-modal .modal-content {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.success-modal .modal-content {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.modal button {
+  margin-top: 15px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.modal button:hover {
+  background-color: #45a049;
+}
+
+
 @media (max-width: 768px) {
-  .reset-password-form {
+  .reset-form {
     width: 80%;
   }
 
-  .reset-password-modal-content {
+  .modal-content {
     width: 85%;
-  }
-
-  .reset-password-form h1 {
-    font-size: 1.5rem;
   }
 }
 
 @media (max-width: 480px) {
-  .reset-password-form {
+  .reset-form {
     width: 90%;
+    padding: 20px;
   }
 
-  .reset-password-modal-content {
-    width: 95%;
-  }
-
-  .reset-password-form h1 {
-    font-size: 1.3rem;
-  }
-
-  .reset-password-form p {
-    font-size: 0.9rem;
+  .modal-content {
+    width: 90%;
   }
 }
