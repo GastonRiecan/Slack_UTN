@@ -1,45 +1,44 @@
 # SLACK (TP final UTN)
 
-### Desafío elegido:
-Me basé en Slack, para desarrollar una aplicacion de chat con React y React-router, que cumple con las siguientes consignas:
-
+- Desafío elegido:
+Desarrolle un chat en donde se puede registrar usuarios, loguearse y reestabelecer credenciales de ingreso, una vez ingresado se puede enviar, actualizar y eliminar mensajes.
 ---
-- Despliegue en vercel (o hosting de elección) funcional
+- Despliegue en vercel del backend y frontend.
 
-- Código subido en github
+- Código subido en github en repositorios separados para backend y frontend.
 
-- Readme.md con una descripción del desafío elegido, librerías usadas y dificultades presentadas a la hora de resolverse (opcional)
+- La app es responsiva de las medidas 320px a 2000px.
 
-- La página debe ser totalmente responsiva de las medidas 320px a 2000px
+- La app esta desarrollada en React.
 
-- La página debe tener estilos accesibles acordes a los vistos en clase (fondos claros con letras claras se considera inaccesible)
+- La app cuenta con el uso de estados y useEffect.
 
-- La página debe estar desarrollada en React.
+- El enrutamiento de la página se desarrollo con react-router-dom.
 
-- La página debe contar con el uso de estados (algún caso de useEffect)
+- Cuenta con el uso de formularios para registro, logueo, recuperacion y reseteo de contraseña.
 
-- El enrutamiento de la página debe ser desarrollado con react-router-dom
+- Se implementan componentes en toda la app. 
 
-- Debe contar con el uso de formularios
+- Cuenta con flujo de paginas organizadas con react-router-dom.
 
-- Deben usarse componentes 
+- Se utiliza sessionStorage para guardan tokens de acceso.
 
-- Se debe contar con al menos 3 páginas en el flujo de la aplicación y debe usarse al menos en una los parámetros de búsqueda de react-router-dom
-
-- Uso de localStorage o sessionStorage
-
-- Uso de fetch para cargar información de un JSON, fake-api o alguna api pública como poke-api
+- Uso de fetch para cargar información de los workspaces de trabajo, mensajes de los chats eh informacion del usuario traidos desde la base de datos.
 
 - Calidad de código siguiendo los principios de la programación vistos en clase (DRY, YAGNI, KISS)
 
+---
 
-Se propone al alumno el desarrollo de la siguiente aplicación web:
+- Herramientas utilizadas:
+- Frontend: React, react-router-dom.
+- Backend: Node.js, Express, Moongosse.
+- Base de datos: Mongodb.
 
-![](sketch_01.png)
-![](sketch_02.png)
-![](sketch_03.png)
-![](sketch_04.png)
+---
 
-
+-Dificultades y aprendizaje:
+-La dificultad mas grande que me toco afrontar fue modificar el frontend ya desarrollado para poder incluir los nuevos componentes y hacer que todo funcione sin problemas. Simplifique la aplicacion al solo dejar la opcion de manipulacion de mensajes ya que tuve que rediseñar la estructura de la base de datos y como se iba a acceder a los elementos guardados. Momentaneamente no se pueden crear Workspaces y canales pero es una funcionalidad que voy a agregar pronto.
+-Aprendi muchisimo haciendo este proyecto, por momentos frustante a la hora de de desplegar y que todo funcione correctamente pero eso hizo que el flujo de toda la aplicacion se vuelva mucho mas familiar en mi cabeza. Tambien comprender la importancia de estandarizar respuestas y metodos de desarrollo al comunicar frontend con backend y viceversa, hizo afianzar las buenas practicas al programar.
+Todo el desarrollo fue una escalera de aprendizaje, todo muy positivo, me llevo miles de aprendizajes. 
 
 
