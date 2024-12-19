@@ -44,6 +44,7 @@ const ResetPasswordForm = () => {
           "Hubo un problema al actualizar la password. Intenta nuevamente."
         );
         setSuccess(null);
+        setIsSubmitting(false)
       }
     } catch (error) {
       console.error("Error en la solicitud:", error);
